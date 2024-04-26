@@ -100,6 +100,18 @@ return {
         },
         ruff_lsp = {},
       },
+      setup = {
+        eslint = function()
+          require('lspconfig').eslint.on_attach = function(client, _)
+            client.server_capabilities.documentFormattingProvider = true
+          end
+        end,
+        tsserver = function()
+          require('lspconfig').tsserver.on_attach = function(client, _)
+            client.server_capabilities.documentFormattingProvider = true
+          end
+        end,
+      }
     },
     config = function()
       local cmp = require('cmp')
