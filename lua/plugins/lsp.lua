@@ -3,7 +3,7 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = {
       { "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
-      { "folke/neodev.nvim",  opts = {} },
+      { "folke/neodev.nvim", opts = {} },
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
       "hrsh7th/cmp-nvim-lsp",
@@ -18,32 +18,32 @@ return {
         "SmiteshP/nvim-navic",
         opts = {
           icons = {
-            File = ' ',
-            Module = ' ',
-            Namespace = ' ',
-            Package = ' ',
-            Class = ' ',
-            Method = ' ',
-            Property = ' ',
-            Field = ' ',
-            Constructor = ' ',
-            Enum = ' ',
-            Interface = ' ',
-            Function = ' ',
-            Variable = ' ',
-            Constant = ' ',
-            String = ' ',
-            Number = ' ',
-            Boolean = ' ',
-            Array = ' ',
-            Object = ' ',
-            Key = ' ',
-            Null = ' ',
-            EnumMember = ' ',
-            Struct = ' ',
-            Event = ' ',
-            Operator = ' ',
-            TypeParameter = ' '
+            File = " ",
+            Module = " ",
+            Namespace = " ",
+            Package = " ",
+            Class = " ",
+            Method = " ",
+            Property = " ",
+            Field = " ",
+            Constructor = " ",
+            Enum = " ",
+            Interface = " ",
+            Function = " ",
+            Variable = " ",
+            Constant = " ",
+            String = " ",
+            Number = " ",
+            Boolean = " ",
+            Array = " ",
+            Object = " ",
+            Key = " ",
+            Null = " ",
+            EnumMember = " ",
+            Struct = " ",
+            Event = " ",
+            Operator = " ",
+            TypeParameter = " ",
           },
           lsp = {
             auto_attach = true,
@@ -52,7 +52,7 @@ return {
           separator = "  ",
           click = true,
           depth_limit = 4,
-        }
+        },
       },
     },
     opts = {
@@ -60,9 +60,6 @@ return {
         enabled = true,
       },
       servers = {
-        denols = {
-          enabled = false
-        },
         eslint = {
           settings = {
             workingDirectories = { mode = "auto" },
@@ -100,27 +97,12 @@ return {
         },
         ruff_lsp = {},
       },
-      setup = {
-        eslint = function()
-          require('lspconfig').eslint.on_attach = function(client, _)
-            client.server_capabilities.documentFormattingProvider = true
-          end
-        end,
-        tsserver = function()
-          require('lspconfig').tsserver.on_attach = function(client, _)
-            client.server_capabilities.documentFormattingProvider = true
-          end
-        end,
-      }
     },
     config = function()
-      local cmp = require('cmp')
+      local cmp = require("cmp")
       local cmp_lsp = require("cmp_nvim_lsp")
-      local capabilities = vim.tbl_deep_extend(
-        "force",
-        {},
-        vim.lsp.protocol.make_client_capabilities(),
-        cmp_lsp.default_capabilities())
+      local capabilities =
+        vim.tbl_deep_extend("force", {}, vim.lsp.protocol.make_client_capabilities(), cmp_lsp.default_capabilities())
 
       require("fidget").setup({})
       require("mason").setup()
@@ -132,26 +114,26 @@ return {
         },
         handlers = {
           function(server_name) -- default handler (optional)
-            require("lspconfig")[server_name].setup {
-              capabilities = capabilities
-            }
+            require("lspconfig")[server_name].setup({
+              capabilities = capabilities,
+            })
           end,
 
           ["lua_ls"] = function()
             local lspconfig = require("lspconfig")
-            lspconfig.lua_ls.setup {
+            lspconfig.lua_ls.setup({
               capabilities = capabilities,
               settings = {
                 Lua = {
                   runtime = { version = "Lua 5.1" },
                   diagnostics = {
                     globals = { "vim", "it", "describe", "before_each", "after_each" },
-                  }
-                }
-              }
-            }
+                  },
+                },
+              },
+            })
           end,
-        }
+        },
       })
 
       local cmp_select = { behavior = cmp.SelectBehavior.Select }
@@ -159,21 +141,21 @@ return {
       cmp.setup({
         snippet = {
           expand = function(args)
-            require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+            require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
           end,
         },
         mapping = cmp.mapping.preset.insert({
-          ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-          ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-          ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+          ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
+          ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
+          ["<C-y>"] = cmp.mapping.confirm({ select = true }),
           ["<C-Space>"] = cmp.mapping.complete(),
         }),
         sources = cmp.config.sources({
-          { name = 'nvim_lsp' },
-          { name = 'luasnip' }, -- For luasnip users.
+          { name = "nvim_lsp" },
+          { name = "luasnip" }, -- For luasnip users.
         }, {
-          { name = 'buffer' },
-        })
+          { name = "buffer" },
+        }),
       })
 
       vim.diagnostic.config({
@@ -187,13 +169,13 @@ return {
           prefix = "",
         },
       })
-    end
+    end,
   },
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
       "hrsh7th/cmp-cmdline",
-      "lukas-reineke/cmp-under-comparator"
+      "lukas-reineke/cmp-under-comparator",
     },
     opts = function(_, options)
       local cmp = require("cmp")
@@ -208,9 +190,7 @@ return {
       cmp.setup.cmdline(":", {
         mapping = cmp.mapping.preset.cmdline(),
 
-        sources = cmp.config.sources(
-          { { name = "path" }, },
-          { { name = "cmdline" }, }),
+        sources = cmp.config.sources({ { name = "path" } }, { { name = "cmdline" } }),
       })
 
       options.sorting = {
@@ -261,7 +241,6 @@ return {
             fallback()
           end
         end, { "i", "n" }),
-
       })
     end,
   },
@@ -283,8 +262,6 @@ return {
       -- Define your formatters
       formatters_by_ft = {
         lua = { "stylua" },
-        javascript = { "eslint" },
-        typescript = { "eslint" },
       },
       -- Set up format-on-save
       format_on_save = function(bufnr)
@@ -303,10 +280,7 @@ return {
   {
     "mfussenegger/nvim-lint",
     opts = {
-      linters_by_ft = {
-        javascript = { "eslint", "tsserver" },
-        typescript = { "eslint", "tsserver" }
-      }
+      linters_by_ft = {},
     },
     config = function(_, opts)
       local M = {}
@@ -317,12 +291,12 @@ return {
   },
   {
     "folke/trouble.nvim",
+    branch = "dev",
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    opts = {
-    },
+    opts = {},
     keys = {
-      { "<leader>xx", "<cmd>TroubleToggle document_diagnostics<cr>",  desc = "Document Diagnostics" },
-      { "<leader>xX", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics" },
-    }
-  }
+      { "<leader>xx", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Document Diagnostics" },
+      { "<leader>xX", "<cmd>Trouble diagnostics toggle<cr>", desc = "Workspace Diagnostics" },
+    },
+  },
 }
