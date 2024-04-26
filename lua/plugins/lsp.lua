@@ -60,6 +60,11 @@ return {
         enabled = true,
       },
       servers = {
+        eslint = {
+          settings = {
+            workingDirectories = { mode = "auto" },
+          },
+        },
         tsserver = {
           init_options = { preferences = { importModuleSpecifierPreference = "non-relative" } },
           settings = {
@@ -263,6 +268,8 @@ return {
       -- Define your formatters
       formatters_by_ft = {
         lua = { "stylua" },
+        javascript = { "eslint" },
+        typescript = { "eslint" },
       },
       -- Set up format-on-save
       format_on_save = function(bufnr)
@@ -276,6 +283,21 @@ return {
     init = function()
       -- If you want the formatexpr, here is the place to set it
       vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+    end,
+  },
+  {
+    "mfussenegger/nvim-lint",
+    opts = {
+      linters_by_ft = {
+        javascript = { "eslint", "tsserver" },
+        typescript = { "eslint", "tsserver" }
+      }
+    },
+    config = function(_, opts)
+      local M = {}
+
+      local lint = require("lint")
+      lint.linters_by_ft = opts.linters_by_ft
     end,
   },
   {

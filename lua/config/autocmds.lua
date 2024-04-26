@@ -77,3 +77,9 @@ vim.api.nvim_create_autocmd('LspDetach', {
     vim.keymap.del('n', 'gr', { buffer = args.buf })
   end,
 })
+
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+  callback = function()
+    require("lint").try_lint()
+  end,
+})
