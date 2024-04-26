@@ -60,6 +60,9 @@ return {
         enabled = true,
       },
       servers = {
+        denols = {
+          enabled = false
+        },
         eslint = {
           settings = {
             workingDirectories = { mode = "auto" },
