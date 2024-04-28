@@ -94,6 +94,7 @@ return {
   },
   {
     "olimorris/onedarkpro.nvim",
+    priority = 1000,
     opts = {
       highlights = {
         ["@text.emphasis.markdown_inline"] = { style = "italic" },

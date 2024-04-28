@@ -18,7 +18,6 @@ require("lazy").setup({
   checker = {
     enabled = true
   },
-  install = { colorscheme = { "onedark_dark" } },
   performance = {
     rtp = {
       disabled_plugins = {
