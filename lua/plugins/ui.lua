@@ -1,6 +1,6 @@
 return {
-  { "stevearc/dressing.nvim", },
-  { "MunifTanjim/nui.nvim",   lazy = true },
+  { "stevearc/dressing.nvim" },
+  { "MunifTanjim/nui.nvim", lazy = true },
   {
     "folke/noice.nvim",
     event = "VeryLazy",
@@ -36,23 +36,31 @@ return {
     keys = {
       {
         "<leader>snl",
-        function() require("noice").cmd("last") end,
-        desc = "Noice Last Message"
+        function()
+          require("noice").cmd("last")
+        end,
+        desc = "Noice Last Message",
       },
       {
         "<leader>snh",
-        function() require("noice").cmd("history") end,
-        desc = "Noice History"
+        function()
+          require("noice").cmd("history")
+        end,
+        desc = "Noice History",
       },
       {
         "<leader>sna",
-        function() require("noice").cmd("all") end,
-        desc = "Noice All"
+        function()
+          require("noice").cmd("all")
+        end,
+        desc = "Noice All",
       },
       {
         "<leader>snd",
-        function() require("noice").cmd("dismiss") end,
-        desc = "Dismiss All"
+        function()
+          require("noice").cmd("dismiss")
+        end,
+        desc = "Dismiss All",
       },
     },
   },
@@ -82,10 +90,11 @@ return {
     },
     init = function()
       vim.notify = require("notify")
-    end
+    end,
   },
   {
     "olimorris/onedarkpro.nvim",
+    enabled = false,
     opts = {
       highlights = {
         ["@text.emphasis.markdown_inline"] = { style = "italic" },
@@ -112,10 +121,24 @@ return {
     end,
   },
   {
+    "scottmckendry/cyberdream.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("cyberdream").setup({
+        italic_comments = true,
+        hide_fillchars = true,
+        borderless_telescope = true,
+        terminal_colors = true,
+      })
+      vim.cmd("colorscheme cyberdream") -- set the colorscheme
+    end,
+  },
+  {
     "echasnovski/mini.indentscope",
     version = false,
     init = function()
-      local indentscope = require('mini.indentscope')
+      local indentscope = require("mini.indentscope")
       indentscope.setup({
         symbol = "│",
         options = { try_as_border = true },
@@ -173,11 +196,12 @@ return {
   },
   {
     "nvim-lualine/lualine.nvim",
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {
       options = {
-        theme = "auto",
-        globalstatus = true
+        -- theme = "auto",
+        theme = "cyberdream",
+        globalstatus = true,
       },
       sections = {
         lualine_a = { "mode" },
@@ -190,22 +214,21 @@ return {
               warn = " ",
               info = " ",
               hint = " ",
-            }
+            },
           },
           { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
           { "filename", path = 1 },
           {
             "navic",
             color_correction = "static",
-          }
+          },
         },
-        lualine_x = {
-        },
+        lualine_x = {},
         lualine_y = {
           {
             "progress",
             separator = " ",
-            padding = { left = 1, right = 0 }
+            padding = { left = 1, right = 0 },
           },
           { "location", padding = { left = 0, right = 1 } },
         },
@@ -215,7 +238,7 @@ return {
           end,
         },
       },
-      extensions = { "lazy" }
-    }
+      extensions = { "lazy" },
+    },
   },
 }
