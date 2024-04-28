@@ -53,7 +53,7 @@ map("n", "<leader>by", ":!echo -n % | pbcopy<CR>", { desc = "Copy buffer path" }
 
 vim.keymap.set(
   'n',
-  '<leader>lg',
+  '<leader>gg',
   function() require("util.lazygit").open() end,
   { noremap = true, silent = true }
 )

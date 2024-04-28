@@ -94,7 +94,6 @@ return {
   },
   {
     "olimorris/onedarkpro.nvim",
-    enabled = false,
     opts = {
       highlights = {
         ["@text.emphasis.markdown_inline"] = { style = "italic" },
@@ -118,20 +117,6 @@ return {
     },
     init = function()
       vim.cmd.colorscheme("onedark_dark")
-    end,
-  },
-  {
-    "scottmckendry/cyberdream.nvim",
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require("cyberdream").setup({
-        italic_comments = true,
-        hide_fillchars = true,
-        borderless_telescope = true,
-        terminal_colors = true,
-      })
-      vim.cmd("colorscheme cyberdream") -- set the colorscheme
     end,
   },
   {
@@ -201,8 +186,7 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {
       options = {
-        -- theme = "auto",
-        theme = "cyberdream",
+        theme = "auto",
         globalstatus = true,
       },
       sections = {
