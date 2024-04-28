@@ -1,6 +1,6 @@
 return {
   { "stevearc/dressing.nvim" },
-  { "MunifTanjim/nui.nvim", lazy = true },
+  { "MunifTanjim/nui.nvim",  lazy = true },
   {
     "folke/noice.nvim",
     event = "VeryLazy",
@@ -183,6 +183,8 @@ return {
       plugins = {
         gitsigns = { enabled = true },
         tmux = { enabled = true },
+        twilight = { enabled = false },
+        alacritty = { enabled = true }
       },
     },
     keys = {

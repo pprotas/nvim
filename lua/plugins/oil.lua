@@ -5,13 +5,12 @@ return {
     tag = 'v2.8.0',
     keys = {
       {
-        "<leader>fe",
+        "<leader>e",
         function()
           require("oil").toggle_float()
         end,
-        desc = "Explorer NeoTree (root dir)",
+        desc = "Oil",
       },
-      { "<leader>e", "<leader>fe", desc = "Explorer Oil", remap = true },
     },
     config = function(_, opts)
       require("oil").setup(opts)

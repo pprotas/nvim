@@ -47,3 +47,13 @@ map(
   end,
   { desc = "Toggle auto-format", remap = true }
 )
+
+map("n", "<leader>bo", ":%bd|e#<CR>", { desc = "Delete other buffers" })
+map("n", "<leader>by", ":!echo -n % | pbcopy<CR>", { desc = "Copy buffer path" })
+
+vim.keymap.set(
+  'n',
+  '<leader>lg',
+  function() require("util.lazygit").open() end,
+  { noremap = true, silent = true }
+)

@@ -69,6 +69,13 @@ return {
         end,
         desc = "Grep",
       },
+      {
+        "<leader>sr",
+        function()
+          return require("telescope.builtin").resume()
+        end,
+        desc = "Resume Telescope",
+      },
     },
   },
 }

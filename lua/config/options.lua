@@ -1,10 +1,5 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
-
-local opt = vim.opt
-
-opt.autowrite = true -- Enable auto write
-
 if vim.fn.has('wsl') == 1 then
   vim.g.clipboard = {
     name = 'WslClipboard',
@@ -19,6 +14,10 @@ if vim.fn.has('wsl') == 1 then
     cache_enabled = 0,
   }
 end
+
+local opt = vim.opt
+
+opt.autowrite = true          -- Enable auto write
 opt.clipboard = "unnamedplus" -- Sync with system clipboard
 opt.completeopt = "menu,menuone,noselect"
 opt.confirm = true            -- Confirm to save changes before exiting modified buffer
@@ -57,18 +56,12 @@ opt.fillchars = {
   eob = " ",
 }
 opt.cmdheight = 0
-
 -- Folding
-vim.opt.foldlevel = 99
-vim.opt.foldlevelstart = 99
-
-vim.diagnostic.config({
-  update_in_insert = false,
-})
-
-vim.o.wrap = true
-vim.o.showbreak = "↪ "
-vim.opt.cpoptions:append("n")
-vim.opt.breakindent = true
-vim.opt.breakindentopt = "shift:-2"
-vim.opt.linebreak = true
+opt.foldlevel = 99
+opt.foldlevelstart = 99
+opt.wrap = true
+opt.showbreak = "↪ "
+opt.cpoptions:append("n")
+opt.breakindent = true
+opt.breakindentopt = "shift:-2"
+opt.linebreak = true

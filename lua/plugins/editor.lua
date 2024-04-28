@@ -78,4 +78,22 @@ return {
       require("illuminate").configure(opts)
     end
   },
+  {
+    "nvim-pack/nvim-spectre",
+    opts = {
+      live_update = true,
+    },
+    keys = {
+      {
+        "<leader>ss",
+        function() require("spectre").toggle() end,
+        mode = "n",
+        desc = "Toggle Spectre"
+      }
+    }
+  },
+  {
+    "ethanholz/nvim-lastplace",
+    config = true,
+  },
 }

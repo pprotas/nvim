@@ -21,7 +21,7 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-  group = augroup("close_with_q_custom"),
+  group = augroup("close_with_q"),
   pattern = {
     "help",
     "lspinfo",
@@ -39,6 +39,20 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.bo[event.buf].buflisted = false
     vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
   end,
+})
+
+vim.api.nvim_create_autocmd("TermOpen", {
+  group = augroup("hide_with_q"),
+  pattern = {
+    "term://*lazygit*",
+  },
+  callback = function(event)
+    vim.bo[event.buf].buflisted = false
+    vim.keymap.set("t", "q", function()
+      vim.cmd("stopinsert")
+      vim.cmd("hide")
+    end, { buffer = event.buf, silent = true })
+  end
 })
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -91,4 +105,14 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
   callback = function()
     require("lint").try_lint()
   end,
+})
+
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = "term://*",
+  callback = function()
+    local is_lazygit = vim.b.is_lazygit or false
+    if is_lazygit then
+      vim.cmd("startinsert")
+    end
+  end
 })
