@@ -28,7 +28,6 @@ vim.api.nvim_create_autocmd("FileType", {
     "notify",
     "qf",
     "query",
-    "spectre_panel",
     "checkhealth",
     "fugitiveblame",
     "oil",
@@ -41,18 +40,31 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("hide_with_<C-q>"),
+  pattern = {
+    "spectre_panel",
+  },
+  callback = function(event)
+    vim.bo[event.buf].buflisted = false
+    vim.keymap.set("n", "q", function()
+      vim.cmd("hide")
+    end, { buffer = event.buf, silent = true })
+  end,
+})
+
 vim.api.nvim_create_autocmd("TermOpen", {
-  group = augroup("hide_with_q"),
+  group = augroup("hide_with_<C-q>"),
   pattern = {
     "term://*lazygit*",
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
-    vim.keymap.set("t", "q", function()
+    vim.keymap.set("t", "<C-q>", function()
       vim.cmd("stopinsert")
       vim.cmd("hide")
     end, { buffer = event.buf, silent = true })
-  end
+  end,
 })
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -78,7 +90,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { buffer = args.buf })
     vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = args.buf })
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = args.buf })
-    vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = args.buf })
+    vim.keymap.set("n", "gr", "<Cmd>Trouble lsp_references focus=true<CR>", { buffer = args.buf })
 
     local client = vim.lsp.get_client_by_id(args.data.client_id)
     if client then
@@ -86,6 +98,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
         client.server_capabilities.documentFormattingProvider = true
       elseif client.name == "tsserver" then
         client.server_capabilities.documentFormattingProvider = false
+      end
+      if client.server_capabilities.inlayHintProvider and vim.lsp.buf.inlay_hint then
+        vim.lsp.buf.inlay_hint(args.bufnr, true)
       end
     end
   end,
@@ -114,5 +129,5 @@ vim.api.nvim_create_autocmd("BufEnter", {
     if is_lazygit then
       vim.cmd("startinsert")
     end
-  end
+  end,
 })

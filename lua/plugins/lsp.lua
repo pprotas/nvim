@@ -2,8 +2,8 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      { "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
-      { "folke/neodev.nvim",  opts = {} },
+      { "folke/neoconf.nvim", cmd = "Neoconf", config = false },
+      { "folke/neodev.nvim", opts = {} },
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
       "hrsh7th/cmp-nvim-lsp",
@@ -55,74 +55,17 @@ return {
         },
       },
     },
-    opts = {
-      diagnostics = {
-        underline = true,
-        update_in_insert = false,
-        virtual_text = {
-          spacing = 4,
-          source = "if_many",
-          prefix = "●",
-        },
-        severity_sort = true,
-        signs = {
-          text = {
-            [vim.diagnostic.severity.ERROR] = " ",
-            [vim.diagnostic.severity.WARN] = " ",
-            [vim.diagnostic.severity.HINT] = " ",
-            [vim.diagnostic.severity.INFO] = " ",
-          },
-        },
-      },
-      inlay_hints = {
-        enabled = true,
-      },
-      servers = {
-        eslint = {
-          settings = {
-            workingDirectories = { mode = "auto" },
-          },
-        },
-        tsserver = {
-          init_options = { preferences = { importModuleSpecifierPreference = "non-relative" } },
-          settings = {
-            javascript = {
-              inlayHints = {
-                includeInlayFunctionParameterTypeHints = true,
-                includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
-                includeInlayPropertyDeclarationTypeHints = true,
-                includeInlayVariableTypeHints = true,
-              },
-            },
-            typescript = {
-              inlayHints = {
-                includeInlayFunctionParameterTypeHints = true,
-                includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
-                includeInlayPropertyDeclarationTypeHints = true,
-                includeInlayVariableTypeHints = true,
-              },
-            },
-          },
-        },
-        lua_ls = {
-          settings = {
-            Lua = {
-              hint = {
-                enable = true,
-              },
-            },
-          },
-        },
-        ruff_lsp = {},
-      },
-    },
+    opts = {},
     config = function()
       local cmp = require("cmp")
       local cmp_lsp = require("cmp_nvim_lsp")
       local capabilities =
-          vim.tbl_deep_extend("force", {}, vim.lsp.protocol.make_client_capabilities(), cmp_lsp.default_capabilities())
+        vim.tbl_deep_extend("force", {}, vim.lsp.protocol.make_client_capabilities(), cmp_lsp.default_capabilities())
 
       require("fidget").setup({})
+
+      require("neoconf").setup()
+
       require("mason").setup()
       require("mason-lspconfig").setup({
         ensure_installed = {
@@ -137,6 +80,24 @@ return {
             })
           end,
 
+          ["tsserver"] = function()
+            local lspconfig = require("lspconfig")
+            lspconfig.tsserver.setup({
+              capabilities = capabilities,
+              init_options = {
+                preferences = {
+                  includeInlayParameterNameHints = "all",
+                  includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+                  includeInlayFunctionParameterTypeHints = true,
+                  includeInlayVariableTypeHints = true,
+                  includeInlayPropertyDeclarationTypeHints = true,
+                  includeInlayFunctionLikeReturnTypeHints = true,
+                  includeInlayEnumMemberValueHints = true,
+                  importModuleSpecifierPreference = "non-relative",
+                },
+              },
+            })
+          end,
           ["lua_ls"] = function()
             local lspconfig = require("lspconfig")
             lspconfig.lua_ls.setup({
@@ -147,6 +108,7 @@ return {
                   diagnostics = {
                     globals = { "vim", "it", "describe", "before_each", "after_each" },
                   },
+                  hint = { enable = true },
                 },
               },
             })
@@ -176,6 +138,12 @@ return {
         }),
       })
 
+      local signs = { Error = "󰅚 ", Warn = "󰀪 ", Hint = "󰌶 ", Info = " " }
+      for type, icon in pairs(signs) do
+        local hl = "DiagnosticSign" .. type
+        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+      end
+
       vim.diagnostic.config({
         -- update_in_insert = true,
         float = {
@@ -186,6 +154,14 @@ return {
           header = "",
           prefix = "",
         },
+        virtual_text = {
+          spacing = 4,
+          source = "if_many",
+          prefix = "●",
+        },
+        underline = true,
+        severity_sort = true,
+        signs = true,
       })
     end,
   },
@@ -301,20 +277,21 @@ return {
       linters_by_ft = {},
     },
     config = function(_, opts)
-      local M = {}
-
       local lint = require("lint")
       lint.linters_by_ft = opts.linters_by_ft
     end,
   },
   {
     "folke/trouble.nvim",
+    cmd = "Trouble",
     branch = "dev",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {},
     keys = {
-      { "<leader>xx", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Document Diagnostics" },
-      { "<leader>xX", "<cmd>Trouble diagnostics toggle<cr>",              desc = "Workspace Diagnostics" },
+      { "<leader>xx", "<cmd>Trouble diagnostics toggle filter.buf=0 focus=true<cr>", desc = "Document Diagnostics" },
+      { "<leader>xX", "<cmd>Trouble diagnostics toggle focus=true<cr>", desc = "Workspace Diagnostics" },
+      { "<leader>xq", "<cmd>Trouble quickfix toggle focus=true<cr>", desc = "Quickfix" },
+      { "<leader>xl", "<cmd>Trouble loclist toggle focus=true<cr>", desc = "Loclist" },
     },
   },
 }
