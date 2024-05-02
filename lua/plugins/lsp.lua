@@ -256,6 +256,7 @@ return {
       -- Define your formatters
       formatters_by_ft = {
         lua = { "stylua" },
+        gdscript = { "gdformat" }
       },
       -- Set up format-on-save
       format_on_save = function(bufnr)
@@ -274,7 +275,9 @@ return {
   {
     "mfussenegger/nvim-lint",
     opts = {
-      linters_by_ft = {},
+      linters_by_ft = {
+        gdscript = { "gdlint" }
+      },
     },
     config = function(_, opts)
       local lint = require("lint")
