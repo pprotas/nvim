@@ -16,7 +16,7 @@ require("lazy").setup({
     { import = "plugins" },
   },
   checker = {
-    enabled = true
+    enabled = true,
   },
   performance = {
     rtp = {

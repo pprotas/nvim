@@ -39,14 +39,12 @@ return {
             end
           end,
         },
-        context_commentstring = { enable = true, enable_autocmd = false },
         incremental_selection = {
           keymaps = {
             init_selection = "+",
             node_incremental = "+",
             node_decremental = "-",
           },
-
         },
         endwise = {
           enable = true,
@@ -77,6 +75,6 @@ return {
           "vimdoc",
         },
       })
-    end
+    end,
   },
 }

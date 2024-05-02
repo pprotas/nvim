@@ -82,6 +82,7 @@ return {
 
           ["tsserver"] = function()
             local lspconfig = require("lspconfig")
+            ---@diagnostic disable-next-line: missing-fields
             lspconfig.tsserver.setup({
               capabilities = capabilities,
               init_options = {
@@ -103,11 +104,15 @@ return {
             lspconfig.lua_ls.setup({
               capabilities = capabilities,
               settings = {
+                ---@diagnostic disable-next-line: missing-fields
                 Lua = {
+                  ---@diagnostic disable-next-line: missing-fields
                   runtime = { version = "Lua 5.1" },
+                  ---@diagnostic disable-next-line: missing-fields
                   diagnostics = {
                     globals = { "vim", "it", "describe", "before_each", "after_each" },
                   },
+                  ---@diagnostic disable-next-line: missing-fields
                   hint = { enable = true },
                 },
               },
@@ -150,7 +155,7 @@ return {
           focusable = false,
           style = "minimal",
           border = "rounded",
-          source = "always",
+          source = true,
           header = "",
           prefix = "",
         },
@@ -199,7 +204,7 @@ return {
       }
 
       options.mapping = {
-        ["<CR>"] = cmp.mapping.confirm({ select = false }),
+        ["<cr>"] = cmp.mapping.confirm({ select = false }),
       }
       options.completion = { completeopt = "menuone,noselect,preview" }
 
@@ -256,7 +261,7 @@ return {
       -- Define your formatters
       formatters_by_ft = {
         lua = { "stylua" },
-        gdscript = { "gdformat" }
+        gdscript = { "gdformat" },
       },
       -- Set up format-on-save
       format_on_save = function(bufnr)
@@ -276,7 +281,7 @@ return {
     "mfussenegger/nvim-lint",
     opts = {
       linters_by_ft = {
-        gdscript = { "gdlint" }
+        gdscript = { "gdlint" },
       },
     },
     config = function(_, opts)

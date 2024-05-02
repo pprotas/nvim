@@ -1,5 +1,8 @@
 vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
+
+-- Clipboard
+vim.o.clipboard = "unnamedplus"
+-- WSL clipboard is messed up. This is a workaround
 if vim.fn.has("wsl") == 1 then
   vim.g.clipboard = {
     name = "WslClipboard",
@@ -15,39 +18,49 @@ if vim.fn.has("wsl") == 1 then
   }
 end
 
-local opt = vim.opt
+-- Buffer changes
+vim.o.autowrite = true
+vim.o.confirm = true
+vim.o.undofile = true
+vim.o.undolevels = 10000
+vim.o.virtualedit = "block"
 
-opt.autowrite = true -- Enable auto write
-opt.clipboard = "unnamedplus" -- Sync with system clipboard
-opt.completeopt = "menu,menuone,noselect"
-opt.confirm = true -- Confirm to save changes before exiting modified buffer
-opt.cursorline = true -- Enable highlighting of the current line
-opt.expandtab = true -- Use spaces instead of tabs
-opt.ignorecase = true -- Ignore case
-opt.inccommand = "nosplit" -- preview incremental substitute
-opt.list = true -- Show some invisible characters (tabs...
-opt.mouse = "a" -- Enable mouse mode
-opt.number = true -- Print line number
-opt.pumblend = 10 -- Popup blend
-opt.pumheight = 10 -- Maximum number of entries in a popup
-opt.relativenumber = true -- Relative line numbers
-opt.scrolloff = 8 -- Lines of context
-opt.shiftwidth = 2 -- Size of an indent
-opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
-opt.smartcase = true -- Don't ignore case with capitals
-opt.smartindent = true -- Insert indents automatically
-opt.spelllang = { "en" }
-opt.splitbelow = true -- Put new windows below current
-opt.splitkeep = "screen"
-opt.splitright = true -- Put new windows right of current
-opt.tabstop = 2 -- Number of spaces tabs count for
-opt.termguicolors = true -- True color support
-opt.undofile = true
-opt.undolevels = 10000
-opt.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode
-opt.wildmode = "longest:full,full" -- Command-line completion mode
-opt.winminwidth = 5 -- Minimum window width
-opt.fillchars = {
+-- Search and replace
+vim.o.ignorecase = true
+vim.o.inccommand = "nosplit"
+vim.o.smartcase = true
+
+-- Tabs and spaces
+vim.o.expandtab = true
+vim.o.list = true
+vim.o.shiftwidth = 2
+vim.o.smartindent = true
+vim.o.tabstop = 2
+
+-- Line numbers
+vim.o.number = true
+vim.o.relativenumber = true
+
+-- Gutters
+vim.o.signcolumn = "yes"
+
+-- Mouse
+vim.o.mouse = "a"
+
+-- Buffer/window/split navigation
+vim.o.scrolloff = 8
+vim.o.splitbelow = true
+vim.o.splitright = true
+vim.o.splitkeep = "screen"
+
+-- Spelling
+vim.o.spelllang = "en"
+
+-- Colors
+vim.o.termguicolors = true
+
+-- Folding
+vim.opt.fillchars = {
   foldopen = "",
   foldclose = "",
   fold = " ",
@@ -55,13 +68,13 @@ opt.fillchars = {
   diff = "╱",
   eob = " ",
 }
-opt.cmdheight = 0
--- Folding
-opt.foldlevel = 99
-opt.foldlevelstart = 99
-opt.wrap = true
-opt.showbreak = "↪ "
-opt.cpoptions:append("n")
-opt.breakindent = true
-opt.breakindentopt = "shift:-2"
-opt.linebreak = true
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99
+
+-- Wrapping lines
+vim.o.wrap = true
+vim.o.showbreak = "↪ "
+vim.opt.cpoptions:append("n")
+vim.o.breakindent = true
+vim.o.breakindentopt = "shift:-2"
+vim.o.linebreak = true

@@ -1,3 +1,4 @@
+-- Utility to open up `lazygit` in a terminal
 local M = {}
 
 function M.toggle_lazygit()
@@ -26,16 +27,16 @@ function M.toggle_lazygit()
       vim.api.nvim_win_close(M.lazygit_win, true)
       M.lazygit_buf = nil
       M.lazygit_win = nil
-    end
+    end,
   }
 
   vim.fn.termopen("lazygit", term_opts)
-  vim.api.nvim_buf_set_var(M.lazygit_buf, 'is_lazygit', true)
   vim.cmd("startinsert")
 end
 
+-- Open `lazygit` in a terminal
 function M.open()
-  local Process   = require("lazy.manage.process")
+  local Process = require("lazy.manage.process")
   local ok, lines = pcall(Process.exec, { "lazygit", "-cd" })
 
   if ok then

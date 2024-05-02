@@ -176,7 +176,7 @@ return {
     keys = {
       {
         "<Leader>z",
-        "<Cmd>ZenMode<CR>",
+        "<cmd>ZenMode<cr>",
         desc = "Zen mode",
       },
     },
