@@ -1,8 +1,29 @@
 return {
-  { "stevearc/dressing.nvim" },
+  { "stevearc/dressing.nvim", event = "VeryLazy" },
   { "MunifTanjim/nui.nvim", lazy = true },
   {
+    "rcarriga/nvim-notify",
+    lazy = true,
+    opts = {
+      stages = "static",
+      timeout = 3000,
+      max_height = function()
+        return math.floor(vim.o.lines * 0.75)
+      end,
+      max_width = function()
+        return math.floor(vim.o.columns * 0.75)
+      end,
+      on_open = function(win)
+        vim.api.nvim_win_set_config(win, { zindex = 100 })
+      end,
+    },
+  },
+  {
     "folke/noice.nvim",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    },
     event = "VeryLazy",
     opts = {
       lsp = {
@@ -31,66 +52,39 @@ return {
         command_palette = true,
         long_message_to_split = true,
         inc_rename = true,
+        lsp_doc_border = true,
       },
     },
     keys = {
       {
-        "<leader>snl",
+        "<leader>nl",
         function()
           require("noice").cmd("last")
         end,
         desc = "Noice Last Message",
       },
       {
-        "<leader>snh",
+        "<leader>nh",
         function()
           require("noice").cmd("history")
         end,
         desc = "Noice History",
       },
       {
-        "<leader>sna",
+        "<leader>na",
         function()
           require("noice").cmd("all")
         end,
         desc = "Noice All",
       },
       {
-        "<leader>snd",
+        "<leader>nd",
         function()
           require("noice").cmd("dismiss")
         end,
         desc = "Dismiss All",
       },
     },
-  },
-  {
-    "rcarriga/nvim-notify",
-    keys = {
-      {
-        "<leader>un",
-        function()
-          require("notify").dismiss({ silent = true, pending = true })
-        end,
-        desc = "Dismiss All Notifications",
-      },
-    },
-    opts = {
-      stages = "static",
-      timeout = 3000,
-      max_height = function()
-        return math.floor(vim.o.lines * 0.75)
-      end,
-      max_width = function()
-        return math.floor(vim.o.columns * 0.75)
-      end,
-      on_open = function(win)
-        vim.api.nvim_win_set_config(win, { zindex = 100 })
-      end,
-    },
-    init = function()
-      vim.notify = require("notify")
-    end,
   },
   {
     "olimorris/onedarkpro.nvim",
@@ -122,8 +116,9 @@ return {
   },
   {
     "echasnovski/mini.indentscope",
+    event = "VeryLazy",
     version = false,
-    init = function()
+    config = function()
       local indentscope = require("mini.indentscope")
       indentscope.setup({
         symbol = "│",
@@ -132,30 +127,11 @@ return {
           animation = indentscope.gen_animation.none(),
         },
       })
-
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = {
-          "help",
-          "alpha",
-          "dashboard",
-          "neo-tree",
-          "Trouble",
-          "trouble",
-          "lazy",
-          "mason",
-          "notify",
-          "toleterm",
-          "lazyterm",
-        },
-
-        callback = function()
-          vim.b.miniindentscope_disable = true
-        end,
-      })
     end,
   },
   {
     "kevinhwang91/nvim-ufo",
+    event = "VeryLazy",
     dependencies = "kevinhwang91/promise-async",
     opts = {
       provider_selector = function()
@@ -169,7 +145,6 @@ return {
       plugins = {
         gitsigns = { enabled = true },
         tmux = { enabled = true },
-        twilight = { enabled = false },
         alacritty = { enabled = true },
       },
     },
@@ -180,32 +155,43 @@ return {
         desc = "Zen mode",
       },
     },
-    dependencies = { "folke/twilight.nvim" },
   },
   {
     "nvim-lualine/lualine.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    event = "VeryLazy",
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+      "SmiteshP/nvim-navic",
+    },
     opts = {
       options = {
         theme = "auto",
         globalstatus = true,
       },
-      tabline = {},
+      tabline = {
+        lualine_a = {
+          {
+            "tabs",
+            mode = 2,
+            cond = function()
+              return #vim.api.nvim_list_tabpages() > 1
+            end,
+          },
+        },
+        lualine_c = {
+          { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+          { "filename", path = 1 },
+          {
+            "navic",
+            color_correction = "static",
+          },
+        },
+      },
       sections = {
         lualine_a = { "mode" },
         lualine_b = { "branch" },
         lualine_c = {
-          {
-            "diagnostics",
-            symbols = {
-              error = " ",
-              warn = " ",
-              info = " ",
-              hint = " ",
-            },
-          },
-          { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-          { "filename", path = 1 },
+          "diagnostics",
           {
             "diff",
             symbols = {
@@ -223,10 +209,6 @@ return {
                 }
               end
             end,
-          },
-          {
-            "navic",
-            color_correction = "static",
           },
         },
         lualine_x = {},

@@ -129,9 +129,29 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
--- Linting on save
-vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+-- Linting
+vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave" }, {
   callback = function()
     require("lint").try_lint()
+  end,
+})
+
+-- Indentscope toggling
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = {
+    "help",
+    "alpha",
+    "dashboard",
+    "neo-tree",
+    "Trouble",
+    "trouble",
+    "lazy",
+    "mason",
+    "notify",
+    "toleterm",
+    "lazyterm",
+  },
+  callback = function()
+    vim.b.miniindentscope_disable = true
   end,
 })

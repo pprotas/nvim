@@ -1,22 +1,26 @@
 return {
   {
+    "nvim-telescope/telescope-live-grep-args.nvim",
+    lazy = true,
+    config = function()
+      require("telescope").load_extension("live_grep_args")
+    end,
+  },
+  {
+    "nvim-telescope/telescope-fzf-native.nvim",
+    lazy = true,
+    build = "make",
+    config = function()
+      require("telescope").load_extension("fzf")
+    end,
+  },
+  {
     "nvim-telescope/telescope.nvim",
-    tag = '0.1.6',
+    tag = "0.1.6",
     dependencies = {
-      'nvim-lua/plenary.nvim',
-      {
-        "nvim-telescope/telescope-live-grep-args.nvim",
-        config = function()
-          require("telescope").load_extension("live_grep_args")
-        end,
-      },
-      {
-        "nvim-telescope/telescope-fzf-native.nvim",
-        build = "make",
-        config = function()
-          require("telescope").load_extension("fzf")
-        end,
-      },
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope-live-grep-args.nvim",
+      "nvim-telescope/telescope-fzf-native.nvim",
     },
     opts = {
       defaults = {

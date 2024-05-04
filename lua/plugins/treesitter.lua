@@ -1,10 +1,16 @@
 return {
-  { "RRethy/nvim-treesitter-endwise" },
-  { "windwp/nvim-ts-autotag" },
-  { "nvim-treesitter/nvim-treesitter-context", config = true },
+  { "nvim-treesitter/nvim-treesitter-context", lazy = true },
+  { "RRethy/nvim-treesitter-endwise", lazy = true },
+  { "windwp/nvim-ts-autotag", lazy = true },
+  {
+    "JoosepAlviste/nvim-ts-context-commentstring",
+    lazy = true,
+    opts = {
+      enable_autocmd = false,
+    },
+  },
   {
     "ckolkey/ts-node-action",
-    config = true,
     keys = {
       {
         "M",
@@ -17,9 +23,17 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
+    lazy = true,
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter-context",
+      "RRethy/nvim-treesitter-endwise",
+      "windwp/nvim-ts-autotag",
+      "RRethy/vim-illuminate",
+    },
+    event = "VeryLazy",
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     version = false,
+    build = ":TSUpdate",
     config = function()
       local configs = require("nvim-treesitter.configs")
 

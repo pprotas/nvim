@@ -14,6 +14,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   spec = {
     { import = "plugins" },
+    { import = "plugins.lsp" },
   },
   checker = {
     enabled = true,
@@ -26,6 +27,13 @@ require("lazy").setup({
         "tohtml",
         "tutor",
         "zipPlugin",
+        "man",
+        "matchit",
+        "netrwPlugin",
+        "rplugin",
+        "osc52",
+        "shada",
+        "editorconfig",
       },
     },
   },

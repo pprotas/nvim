@@ -58,6 +58,7 @@ vim.o.spelllang = "en"
 
 -- Colors
 vim.o.termguicolors = true
+vim.o.cursorline = true
 
 -- Folding
 vim.opt.fillchars = {
@@ -78,3 +79,37 @@ vim.opt.cpoptions:append("n")
 vim.o.breakindent = true
 vim.o.breakindentopt = "shift:-2"
 vim.o.linebreak = true
+
+-- LSP
+vim.diagnostic.config({
+  float = {
+    focusable = false,
+    style = "minimal",
+    border = "rounded",
+    source = true,
+    header = "",
+    prefix = "",
+  },
+  virtual_text = {
+    spacing = 4,
+    source = "if_many",
+    prefix = "●",
+  },
+  underline = true,
+  severity_sort = true,
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = " ",
+      [vim.diagnostic.severity.WARN] = " ",
+      [vim.diagnostic.severity.HINT] = " ",
+      [vim.diagnostic.severity.INFO] = " ",
+    },
+  },
+})
+
+-- Plugin-specific
+-- Better loading performance for "JoosepAlviste/nvim-ts-context-commentstring"
+vim.g.skip_ts_context_commentstring_module = true
+
+-- Filetypes with slow formatters for "stevearc/conform.nvim"
+vim.g.slow_format_filetypes = {}

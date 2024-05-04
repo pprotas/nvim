@@ -1,15 +1,25 @@
 return {
-  "felipec/vim-sanegx",
+  {
+    "felipec/vim-sanegx",
+    event = "VeryLazy",
+  },
   {
     "ethanholz/nvim-lastplace",
-    config = true,
+    event = "VeryLazy",
   },
   {
     "nacro90/numb.nvim",
+    event = "CmdlineEnter",
+    config = true,
+  },
+  {
+    "ethanholz/nvim-lastplace",
+    event = "VeryLazy",
     config = true,
   },
   {
     "echasnovski/mini.surround",
+    event = "VeryLazy",
     opts = {
       mappings = {
         add = "ma",
@@ -23,14 +33,9 @@ return {
     },
   },
   {
-    "JoosepAlviste/nvim-ts-context-commentstring",
-    lazy = true,
-    opts = {
-      enable_autocmd = false,
-    },
-  },
-  {
     "echasnovski/mini.comment",
+    event = "VeryLazy",
+    dependencies = "JoosepAlviste/nvim-ts-context-commentstring",
     opts = {
       options = {
         custom_commentstring = function()
@@ -41,42 +46,51 @@ return {
   },
   {
     "folke/flash.nvim",
-    opts = {},
     keys = {
       {
         "s",
         mode = { "n", "x", "o" },
-        function() require("flash").jump() end,
-        desc = "Flash"
+        function()
+          require("flash").jump()
+        end,
+        desc = "Flash",
       },
       {
         "S",
         mode = { "n", "o", "x" },
-        function() require("flash").treesitter() end,
-        desc = "Flash Treesitter"
+        function()
+          require("flash").treesitter()
+        end,
+        desc = "Flash Treesitter",
       },
     },
   },
   {
     "folke/persistence.nvim",
     event = "BufReadPre",
-    opts = {},
+    config = true,
     keys = {
-      { "<leader>xs", function() require("persistence").load() end, mode = "n", desc = "Restore session" }
-    }
+      {
+        "<leader>xs",
+        function()
+          require("persistence").load()
+        end,
+        mode = "n",
+        desc = "Restore session",
+      },
+    },
   },
   {
     "RRethy/vim-illuminate",
+    lazy = true,
     opts = {
       delay = 200,
+      providers = { "lsp" },
       large_file_cutoff = 2000,
-      large_file_overrides = {
-        providers = { "lsp" },
-      },
     },
     config = function(_, opts)
       require("illuminate").configure(opts)
-    end
+    end,
   },
   {
     "nvim-pack/nvim-spectre",
@@ -86,14 +100,12 @@ return {
     keys = {
       {
         "<leader>ss",
-        function() require("spectre").toggle() end,
+        function()
+          require("spectre").toggle()
+        end,
         mode = "n",
-        desc = "Toggle Spectre"
-      }
-    }
-  },
-  {
-    "ethanholz/nvim-lastplace",
-    config = true,
+        desc = "Toggle Spectre",
+      },
+    },
   },
 }
