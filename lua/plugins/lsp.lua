@@ -262,6 +262,7 @@ return {
       formatters_by_ft = {
         lua = { "stylua" },
         gdscript = { "gdformat" },
+        clang = { "clang-format" },
       },
       -- Set up format-on-save
       format_on_save = function(bufnr)
@@ -282,11 +283,18 @@ return {
     opts = {
       linters_by_ft = {
         gdscript = { "gdlint" },
+        c = { "cppcheck" },
       },
     },
     config = function(_, opts)
       local lint = require("lint")
       lint.linters_by_ft = opts.linters_by_ft
+    end,
+    init = function()
+      local lint = require("lint")
+
+      local cppcheck = lint.linters.cppcheck
+      cppcheck.args = vim.tbl_extend("force", cppcheck.args, { "--suppress=missingIncludeSystem" })
     end,
   },
   {

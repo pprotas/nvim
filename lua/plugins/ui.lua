@@ -1,6 +1,6 @@
 return {
   { "stevearc/dressing.nvim" },
-  { "MunifTanjim/nui.nvim",  lazy = true },
+  { "MunifTanjim/nui.nvim", lazy = true },
   {
     "folke/noice.nvim",
     event = "VeryLazy",
@@ -170,7 +170,7 @@ return {
         gitsigns = { enabled = true },
         tmux = { enabled = true },
         twilight = { enabled = false },
-        alacritty = { enabled = true }
+        alacritty = { enabled = true },
       },
     },
     keys = {
@@ -190,6 +190,7 @@ return {
         theme = "auto",
         globalstatus = true,
       },
+      tabline = {},
       sections = {
         lualine_a = { "mode" },
         lualine_b = { "branch" },
@@ -205,6 +206,24 @@ return {
           },
           { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
           { "filename", path = 1 },
+          {
+            "diff",
+            symbols = {
+              added = " ",
+              modified = " ",
+              removed = " ",
+            },
+            source = function()
+              local gitsigns = vim.b.gitsigns_status_dict
+              if gitsigns then
+                return {
+                  added = gitsigns.added,
+                  modified = gitsigns.changed,
+                  removed = gitsigns.removed,
+                }
+              end
+            end,
+          },
           {
             "navic",
             color_correction = "static",
