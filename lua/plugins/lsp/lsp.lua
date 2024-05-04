@@ -137,6 +137,9 @@ return {
             settings = {
               Lua = {
                 hint = { enable = true },
+                codeLens = {
+                  enable = true,
+                },
               },
             },
           })
