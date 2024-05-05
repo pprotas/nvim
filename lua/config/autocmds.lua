@@ -41,9 +41,9 @@ vim.api.nvim_create_autocmd("FileType", {
     "query",
     "checkhealth",
     "fugitiveblame",
-    "oil",
     "health",
     "lazy",
+    "spectre_panel",
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
