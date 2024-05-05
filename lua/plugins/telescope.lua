@@ -64,28 +64,28 @@ return {
         function()
           return require("telescope.builtin").find_files()
         end,
-        desc = "Telescope fd",
+        desc = "Find files",
       },
       {
         "<leader>.",
         function()
           return require("telescope.builtin").buffers()
         end,
-        desc = "Telescope buffers",
+        desc = "Find buffers",
       },
       {
         "<leader>/",
         function()
           return require("telescope").extensions.live_grep_args.live_grep_args()
         end,
-        desc = "Telescope rg",
+        desc = "Search (ripgrep)",
       },
       {
         "<leader>r",
         function()
           return require("telescope.builtin").resume()
         end,
-        desc = "Telescope resume",
+        desc = "Resume search",
       },
     },
   },

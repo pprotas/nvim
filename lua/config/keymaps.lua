@@ -28,7 +28,7 @@ map("v", "<", "<gv")
 map("v", ">", ">gv")
 
 -- Line diagnostics
-map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line diagnostics" })
 
 -- Easy diagnostic jumping
 local diagnostic_goto = function(next, severity)
@@ -38,8 +38,8 @@ local diagnostic_goto = function(next, severity)
     go({ severity = severity })
   end
 end
-map("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
-map("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
+map("n", "]d", diagnostic_goto(true), { desc = "Next diagnostic" })
+map("n", "[d", diagnostic_goto(false), { desc = "Prev diagnostic" })
 
 -- Easy window splitting
 map("n", "<leader>-", "<C-W>s", { desc = "Split", remap = true })
@@ -59,4 +59,4 @@ map("n", "<leader>by", ":!echo -n % | pbcopy<cr>", { desc = "Copy buffer path" }
 -- Lazygit
 map("n", "<leader>gg", function()
   require("util.lazygit").open()
-end, { noremap = true, silent = true })
+end, { desc = "Lazygit", noremap = true, silent = true })

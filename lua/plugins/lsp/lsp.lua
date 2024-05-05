@@ -17,10 +17,10 @@ return {
     dependencies = "nvim-tree/nvim-web-devicons",
     config = true,
     keys = {
-      { "<leader>xx", "<cmd>Trouble diagnostics toggle filter.buf=0 focus=true<cr>", desc = "Document Diagnostics" },
-      { "<leader>xX", "<cmd>Trouble diagnostics toggle focus=true<cr>", desc = "Workspace Diagnostics" },
-      { "<leader>xq", "<cmd>Trouble quickfix toggle focus=true<cr>", desc = "Quickfix" },
-      { "<leader>xl", "<cmd>Trouble loclist toggle focus=true<cr>", desc = "Loclist" },
+      { "<leader>cc", "<cmd>Trouble diagnostics toggle filter.buf=0 focus=true<cr>", desc = "Document diagnostics" },
+      { "<leader>cC", "<cmd>Trouble diagnostics toggle focus=true<cr>", desc = "Workspace diagnostics" },
+      { "<leader>cq", "<cmd>Trouble quickfix toggle focus=true<cr>", desc = "Quickfix" },
+      { "<leader>cl", "<cmd>Trouble loclist toggle focus=true<cr>", desc = "Loclist" },
     },
   },
   {

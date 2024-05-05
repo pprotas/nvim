@@ -20,22 +20,21 @@ return {
   {
     "echasnovski/mini.surround",
     event = "VeryLazy",
-    opts = {
-      mappings = {
-        add = "ma",
-        delete = "md",
-        find = "mf",
-        find_left = "mF",
-        highlight = "mh",
-        replace = "mr",
-        update_n_lines = "mn",
-      },
-    },
+    config = true,
+  },
+  {
+    "echasnovski/mini.ai",
+    event = "VeryLazy",
+    version = false,
+    config = true,
   },
   {
     "echasnovski/mini.comment",
     event = "VeryLazy",
     dependencies = "JoosepAlviste/nvim-ts-context-commentstring",
+    cond = function()
+      return vim.version().minor < 10
+    end,
     opts = {
       options = {
         custom_commentstring = function()
@@ -48,20 +47,12 @@ return {
     "folke/flash.nvim",
     keys = {
       {
-        "s",
+        "S",
         mode = { "n", "x", "o" },
         function()
           require("flash").jump()
         end,
         desc = "Flash",
-      },
-      {
-        "S",
-        mode = { "n", "o", "x" },
-        function()
-          require("flash").treesitter()
-        end,
-        desc = "Flash Treesitter",
       },
     },
   },
@@ -71,12 +62,11 @@ return {
     config = true,
     keys = {
       {
-        "<leader>xs",
+        "<leader>x",
         function()
           require("persistence").load()
         end,
-        mode = "n",
-        desc = "Restore session",
+        desc = "Resume session",
       },
     },
   },
@@ -99,18 +89,27 @@ return {
     },
     keys = {
       {
-        "<leader>ss",
+        "<leader>s",
         function()
           require("spectre").toggle()
         end,
-        mode = "n",
-        desc = "Toggle Spectre",
+        desc = "Search & replace",
       },
     },
   },
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
-    config = true,
+    config = function(_, opts)
+      local wk = require("which-key")
+      wk.setup(opts)
+      wk.register({
+        b = { name = "Buffer actions" },
+        c = { name = "Code" },
+        g = { name = "Git" },
+        n = { name = "Notifications" },
+        u = { name = "Toggle" },
+      }, { prefix = "<leader>" })
+    end,
   },
 }

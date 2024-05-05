@@ -17,6 +17,18 @@ return {
         vim.api.nvim_win_set_config(win, { zindex = 100 })
       end,
     },
+    keys = {
+      {
+        "<leader>nn",
+        function()
+          local telescope = require("telescope")
+
+          telescope.load_extension("notify")
+          telescope.extensions.notify.notify()
+        end,
+        desc = "Notify history",
+      },
+    },
   },
   {
     "folke/noice.nvim",
@@ -61,28 +73,28 @@ return {
         function()
           require("noice").cmd("last")
         end,
-        desc = "Noice Last Message",
+        desc = "Last message",
       },
       {
         "<leader>nh",
         function()
-          require("noice").cmd("history")
+          require("noice").cmd("telescope")
         end,
-        desc = "Noice History",
+        desc = "Noice history",
       },
       {
         "<leader>na",
         function()
           require("noice").cmd("all")
         end,
-        desc = "Noice All",
+        desc = "All",
       },
       {
         "<leader>nd",
         function()
           require("noice").cmd("dismiss")
         end,
-        desc = "Dismiss All",
+        desc = "Dismiss",
       },
     },
   },
