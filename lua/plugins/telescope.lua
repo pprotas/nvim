@@ -10,12 +10,13 @@ return {
   },
   {
     "nvim-telescope/telescope.nvim",
-    tag = "0.1.6",
+    cmd = "Telescope",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-live-grep-args.nvim",
       "nvim-telescope/telescope-fzf-native.nvim",
     },
+    tag = "0.1.6",
     opts = {
       defaults = {
         mappings = {

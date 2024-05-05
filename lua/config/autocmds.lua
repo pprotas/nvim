@@ -1,15 +1,8 @@
-local function augroup(name)
-  return vim.api.nvim_create_augroup("pvim_" .. name, { clear = true })
-end
-
 -- Toggling relative numbers outside of insert mode
-local number_toggle = augroup("relativenumber")
-
 vim.api.nvim_create_autocmd("InsertEnter", {
   callback = function()
     vim.cmd("set norelativenumber")
   end,
-  group = number_toggle,
   pattern = "*",
 })
 
@@ -17,13 +10,11 @@ vim.api.nvim_create_autocmd("InsertLeave", {
   callback = function()
     vim.cmd("set relativenumber")
   end,
-  group = number_toggle,
   pattern = "*",
 })
 
 -- Make lazygit interactable once it's opened in a terminal
 vim.api.nvim_create_autocmd("BufEnter", {
-  group = augroup("lazygit_startinsert"),
   pattern = "term://*lazygit*",
   callback = function()
     vim.cmd("startinsert")
@@ -32,7 +23,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 -- Closing/hiding some buffers easily
 vim.api.nvim_create_autocmd("FileType", {
-  group = augroup("close_with_q"),
   pattern = {
     "help",
     "lspinfo",
@@ -52,7 +42,6 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("TermOpen", {
-  group = augroup("hide_with_<C-q>"),
   pattern = {
     "term://*lazygit*",
   },
@@ -67,7 +56,6 @@ vim.api.nvim_create_autocmd("TermOpen", {
 
 -- Conceallevel
 vim.api.nvim_create_autocmd("FileType", {
-  group = augroup("conceallevel"),
   pattern = {
     "markdown",
   },
@@ -78,7 +66,6 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- Highlight yanking
 vim.api.nvim_create_autocmd("TextYankPost", {
-  group = augroup("highlight_yank"),
   callback = function()
     vim.highlight.on_yank()
   end,
