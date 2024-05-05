@@ -48,9 +48,9 @@
   "tmux.nvim": { "branch": "main", "commit": "53ea7eab504730e7e8397fd2ae0133053d56afc8" },
   "trouble.nvim": { "branch": "dev", "commit": "b4b9a11b3578d510963f6f681fecb4631ae992c3" },
   "ts-node-action": { "branch": "master", "commit": "6d3b60754fd87963d70eadaa2f77873b447eac26" },
-  "typescript-tools.nvim": { "branch": "master", "commit": "c43d9580c3ff5999a1eabca849f807ab33787ea7" },
   "vim-fugitive": { "branch": "master", "commit": "ce882460cf3db12e99f8bf579cbf99e331f6dd4f" },
   "vim-illuminate": { "branch": "master", "commit": "e522e0dd742a83506db0a72e1ced68c9c130f185" },
   "vim-sanegx": { "branch": "master", "commit": "e97c10401d781199ba1aecd07790d0771314f3f5" },
+  "which-key.nvim": { "branch": "main", "commit": "4433e5ec9a507e5097571ed55c02ea9658fb268a" },
   "zen-mode.nvim": { "branch": "main", "commit": "78557d972b4bfbb7488e17b5703d25164ae64e6a" }
 }

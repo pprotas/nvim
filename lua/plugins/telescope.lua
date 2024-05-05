@@ -2,17 +2,11 @@ return {
   {
     "nvim-telescope/telescope-live-grep-args.nvim",
     lazy = true,
-    config = function()
-      require("telescope").load_extension("live_grep_args")
-    end,
   },
   {
     "nvim-telescope/telescope-fzf-native.nvim",
     lazy = true,
     build = "make",
-    config = function()
-      require("telescope").load_extension("fzf")
-    end,
   },
   {
     "nvim-telescope/telescope.nvim",
@@ -26,21 +20,16 @@ return {
       defaults = {
         mappings = {
           i = {
-            ["<C-b>"] = function(...)
-              return require("telescope.actions").delete_buffer(...)
+            ["<C-b>"] = "delete_buffer",
+            ["<C-i>"] = function()
+              local action_state = require("telescope.actions.state")
+              local line = action_state.get_current_line()
+              return require("telescope.builtin").find_files({ no_ignore = true, default_text = line })
             end,
-            ["<C-q>"] = function(...)
-              require("telescope.actions").send_to_qflist(...)
-              return require("trouble").open("quickfix")
-            end,
-            ["<M-q>"] = function(...)
-              require("telescope.actions").send_selected_to_qflist(...)
-              return require("trouble").open("quickfix")
-            end,
-          },
-          n = {
-            ["<C-b>"] = function(...)
-              return require("telescope.actions").delete_buffer(...)
+            ["<C-h>"] = function()
+              local action_state = require("telescope.actions.state")
+              local line = action_state.get_current_line()
+              return require("telescope.builtin").find_files({ hidden = true, default_text = line })
             end,
           },
         },
@@ -50,35 +39,53 @@ return {
           sort_mru = true,
         },
       },
+      extensions = {
+        live_grep_args = {
+          mappings = {
+            i = {
+              ["<C-k>"] = function(...)
+                return require("telescope-live-grep-args.actions").quote_prompt()(...)
+              end,
+            },
+          },
+        },
+      },
     },
+    config = function(_, opts)
+      local telescope = require("telescope")
+      telescope.setup(opts)
+
+      telescope.load_extension("live_grep_args")
+      telescope.load_extension("fzf")
+    end,
     keys = {
       {
         "<leader> ",
         function()
           return require("telescope.builtin").find_files()
         end,
-        desc = "Files",
+        desc = "Telescope fd",
       },
       {
         "<leader>.",
         function()
           return require("telescope.builtin").buffers()
         end,
-        desc = "Buffers",
+        desc = "Telescope buffers",
       },
       {
         "<leader>/",
         function()
           return require("telescope").extensions.live_grep_args.live_grep_args()
         end,
-        desc = "Grep",
+        desc = "Telescope rg",
       },
       {
-        "<leader>sr",
+        "<leader>r",
         function()
           return require("telescope.builtin").resume()
         end,
-        desc = "Resume Telescope",
+        desc = "Telescope resume",
       },
     },
   },

@@ -42,8 +42,8 @@ map("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
 map("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
 
 -- Easy window splitting
-map("n", "<leader>-", "<C-W>s", { desc = "Split Window Below", remap = true })
-map("n", "<leader>|", "<C-W>v", { desc = "Split Window Right", remap = true })
+map("n", "<leader>-", "<C-W>s", { desc = "Split", remap = true })
+map("n", "<leader>|", "<C-W>v", { desc = "Vsplit", remap = true })
 
 -- Toggle format on save
 map("n", "<leader>uf", function()
