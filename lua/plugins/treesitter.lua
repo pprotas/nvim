@@ -58,16 +58,8 @@ return {
             end
           end,
         },
-        incremental_selection = {
-          keymaps = {
-            init_selection = "+",
-            node_incremental = "+",
-            node_decremental = "-",
-          },
-        },
-        endwise = {
-          enable = true,
-        },
+        indent = { enable = true },
+        endwise = { enable = true },
         autotag = {
           enable = true,
           enable_close_on_slash = false,

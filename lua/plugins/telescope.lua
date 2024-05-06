@@ -79,14 +79,21 @@ return {
         function()
           return require("telescope").extensions.live_grep_args.live_grep_args()
         end,
-        desc = "Search (ripgrep)",
+        desc = "Find text (ripgrep)",
       },
       {
-        "<leader>r",
+        "<leader>sh",
+        function()
+          return require("telescope.builtin").oldfiles()
+        end,
+        desc = "File history",
+      },
+      {
+        "<leader>sr",
         function()
           return require("telescope.builtin").resume()
         end,
-        desc = "Resume search",
+        desc = "Resume previous search",
       },
     },
   },

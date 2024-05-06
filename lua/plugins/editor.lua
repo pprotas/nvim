@@ -89,7 +89,7 @@ return {
     },
     keys = {
       {
-        "<leader>s",
+        "<leader>ss",
         function()
           require("spectre").toggle()
         end,
@@ -109,6 +109,7 @@ return {
         g = { name = "Git" },
         n = { name = "Notifications" },
         u = { name = "Toggle" },
+        s = { name = "Search" },
       }, { prefix = "<leader>" })
     end,
   },

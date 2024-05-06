@@ -14,11 +14,13 @@ return {
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-nvim-lsp",
       "lukas-reineke/cmp-under-comparator",
+      "onsails/lspkind.nvim",
     },
     opts = function()
       local cmp = require("cmp")
 
       local luasnip = require("luasnip")
+      require("luasnip.loaders.from_vscode").lazy_load()
 
       local has_words_before = function()
         unpack = unpack or table.unpack
@@ -29,7 +31,7 @@ return {
       return {
         snippet = {
           expand = function(args)
-            require("luasnip").lsp_expand(args.body)
+            luasnip.lsp_expand(args.body)
           end,
         },
         sorting = {
@@ -74,7 +76,13 @@ return {
         }, {
           { name = "buffer" },
         }),
-        completion = { completeopt = "menuone,noselect,preview" },
+        completion = { completeopt = "menu,menuone,noselect,preview" },
+        formatting = {
+          format = require("lspkind").cmp_format({
+            maxwidth = 50,
+            ellipsis_char = "...",
+          }),
+        },
       }
     end,
     config = function(_, opts)

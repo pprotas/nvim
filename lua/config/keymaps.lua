@@ -53,8 +53,13 @@ map("n", "<leader>uf", function()
 end, { desc = "Toggle auto-format", remap = true })
 
 -- Buffer management
-map("n", "<leader>bo", ":%bd|e#<cr>", { desc = "Delete other buffers" })
-map("n", "<leader>by", ":!echo -n % | pbcopy<cr>", { desc = "Copy buffer path" })
+map("n", "<leader>bo", "<cmd>%bd|e#<cr>", { desc = "Delete other buffers" })
+map(
+  "n",
+  "<leader>by",
+  [[<cmd>redir @* | execute 'echon expand("%")' | redir END | echo @*<cr>]],
+  { desc = "Copy buffer path" }
+)
 
 -- Lazygit
 map("n", "<leader>gg", function()
