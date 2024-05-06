@@ -19,6 +19,7 @@ return {
         gdscript = { "gdformat" },
         clang = { "clang-format" },
         ruby = { "rubocop", "erb-format" },
+        sh = { "shfmt" },
       },
       -- Set up format-on-save
       format_on_save = function(bufnr)

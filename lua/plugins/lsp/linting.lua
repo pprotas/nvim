@@ -7,6 +7,7 @@ return {
         gdscript = { "gdlint" },
         c = { "cppcheck" },
         ruby = { "ruby", "rubocop" },
+        sh = { "shellcheck" },
         javascript = {},
         typescript = {},
       },

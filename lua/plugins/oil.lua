@@ -6,11 +6,11 @@ return {
       view_options = {
         show_hidden = true,
       },
-      git = {
-        add = true,
-        mv = true,
-        rm = true,
-      },
+      -- git = {
+      --   add = true,
+      --   mv = true,
+      --   rm = true,
+      -- },
       keymaps = {
         ["<CR>"] = "actions.select",
         ["<S-cr>"] = "actions.select_vsplit",
