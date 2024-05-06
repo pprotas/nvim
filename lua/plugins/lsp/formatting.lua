@@ -20,6 +20,7 @@ return {
         clang = { "clang-format" },
         ruby = { "rubocop", "erb-format" },
         sh = { "shfmt" },
+        cmake = { "gersemi" }
       },
       -- Set up format-on-save
       format_on_save = function(bufnr)

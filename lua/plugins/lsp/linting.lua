@@ -8,6 +8,7 @@ return {
         c = { "cppcheck" },
         ruby = { "ruby", "rubocop" },
         sh = { "shellcheck" },
+        cmake = { "cmakelint" },
         javascript = {},
         typescript = {},
       },
