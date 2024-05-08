@@ -109,8 +109,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
       elseif client.name == "tsserver" then
         client.server_capabilities.documentFormattingProvider = false
       end
-      if client.supports_method("textDocument/inlayHint") then
-        vim.lsp.inlay_hint.enable()
+      if vim.version().minor > 10 then
+        if client.supports_method("textDocument/inlayHint") then
+          vim.lsp.inlay_hint.enable()
+        end
       end
       if client.supports_method("textDocument/codeLens") then
         vim.lsp.codelens.refresh()
