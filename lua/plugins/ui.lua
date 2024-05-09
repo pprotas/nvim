@@ -267,7 +267,15 @@ return {
             end,
           },
         },
-        lualine_x = {},
+        lualine_x = {
+          {
+            function()
+              local reg = vim.fn.reg_recording()
+              return reg ~= '' and 'recording @' .. reg or ''
+            end,
+            color = { fg = 'orange', bg = 'bg', gui = 'bold' }
+          }
+        },
         lualine_y = {
           {
             "progress",
