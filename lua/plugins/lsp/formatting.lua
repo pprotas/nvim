@@ -13,7 +13,6 @@ return {
       },
     },
     opts = {
-      -- Define your formatters
       formatters_by_ft = {
         lua = { "stylua" },
         gdscript = { "gdformat" },
@@ -23,10 +22,8 @@ return {
         cmake = { "gersemi" },
         cucumber = { "reformat-gherkin" },
       },
-      -- Set up format-on-save
       format_on_save = {
         lsp_fallback = true,
-        async = true,
       },
     },
   },
