@@ -92,24 +92,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
       elseif client.name == "tsserver" then
         client.server_capabilities.documentFormattingProvider = false
       end
-      if vim.version().minor > 10 then
-        if client.supports_method("textDocument/inlayHint") then
-          vim.lsp.inlay_hint.enable()
-        end
+
+      if client.supports_method("textDocument/inlayHint") then
+        vim.lsp.inlay_hint.enable()
       end
-      -- if client.supports_method("textDocument/codeLens") then
-      --   vim.lsp.codelens.refresh()
-      --   vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-      --     buffer = args.buf,
-      --     callback = vim.lsp.codelens.refresh,
-      --   })
-      -- end
     end
   end,
 })
 
 -- Linting
-vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave" }, {
+vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave", "BufWritePost" }, {
   callback = function()
     require("lint").try_lint()
   end,

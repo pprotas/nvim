@@ -30,7 +30,7 @@ return {
     config = true,
   },
   {
-    'echasnovski/mini.pairs',
+    "echasnovski/mini.pairs",
     event = "InsertEnter",
     version = false,
     config = true,
@@ -79,7 +79,7 @@ return {
   },
   {
     "RRethy/vim-illuminate",
-    lazy = true,
+    event = "BufEnter",
     opts = {
       delay = 200,
       providers = { "lsp" },

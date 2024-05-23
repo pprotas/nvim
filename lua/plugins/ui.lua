@@ -1,6 +1,6 @@
 return {
   { "stevearc/dressing.nvim", event = "VeryLazy" },
-  { "MunifTanjim/nui.nvim",   lazy = true },
+  { "MunifTanjim/nui.nvim", lazy = true },
   {
     "goolord/alpha-nvim",
     dependencies = "nvim-lualine/lualine.nvim",
@@ -18,12 +18,12 @@ return {
       dashboard.section.header.type = "group"
       dashboard.section.header.val = {
         -- stylua: ignore start
-        { type = "text", val = "███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗", opts = { hl = "NeovimDashboardLogo1", shrink_margin = false, position = "center" }, },
-        { type = "text", val = "████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║", opts = { hl = "NeovimDashboardLogo2", shrink_margin = false, position = "center" }, },
-        { type = "text", val = "██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║", opts = { hl = "NeovimDashboardLogo3", shrink_margin = false, position = "center" }, },
-        { type = "text", val = "██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║", opts = { hl = "NeovimDashboardLogo4", shrink_margin = false, position = "center" }, },
-        { type = "text", val = "██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║", opts = { hl = "NeovimDashboardLogo5", shrink_margin = false, position = "center" }, },
-        { type = "text", val = "╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝", opts = { hl = "NeovimDashboardLogo6", shrink_margin = false, position = "center" }, },
+        { type = "text", val = "i use ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗      ", opts = { hl = "NeovimDashboardLogo1", shrink_margin = false, position = "center" }, },
+        { type = "text",       val = "████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║", opts = { hl = "NeovimDashboardLogo2", shrink_margin = false, position = "center" }, },
+        { type = "text",       val = "██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║", opts = { hl = "NeovimDashboardLogo3", shrink_margin = false, position = "center" }, },
+        { type = "text",       val = "██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║", opts = { hl = "NeovimDashboardLogo4", shrink_margin = false, position = "center" }, },
+        { type = "text",       val = "██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║", opts = { hl = "NeovimDashboardLogo5", shrink_margin = false, position = "center" }, },
+        { type = "text",   val = "    ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ btw", opts = { hl = "NeovimDashboardLogo6", shrink_margin = false, position = "center" }, },
         -- stylua: ignore end
       }
       dashboard.section.buttons.val = {
@@ -42,12 +42,12 @@ return {
           local stats = require("lazy").stats()
           local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
           dashboard.section.footer.val = "Neovim loaded "
-              .. stats.loaded
-              .. "/"
-              .. stats.count
-              .. " plugins in "
-              .. ms
-              .. "ms"
+            .. stats.loaded
+            .. "/"
+            .. stats.count
+            .. " plugins in "
+            .. ms
+            .. "ms"
           pcall(vim.cmd.AlphaRedraw)
         end,
       })
@@ -271,10 +271,10 @@ return {
           {
             function()
               local reg = vim.fn.reg_recording()
-              return reg ~= '' and 'recording @' .. reg or ''
+              return reg ~= "" and "recording @" .. reg or ""
             end,
-            color = { fg = 'orange', bg = 'bg', gui = 'bold' }
-          }
+            color = { fg = "orange", bg = "bg", gui = "bold" },
+          },
         },
         lualine_y = {
           {
