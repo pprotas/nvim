@@ -76,12 +76,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = args.buf })
     vim.keymap.set("n", "gr", "<cmd>Trouble lsp_references focus=true<cr>", { buffer = args.buf })
-
-    if vim.version().minor < 10 then
-      vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = args.buf })
-      vim.keymap.set("n", "crn", vim.lsp.buf.rename, { buffer = args.buf })
-      vim.keymap.set({ "n", "v" }, "crr", vim.lsp.buf.code_action, { buffer = args.buf })
-    end
+    vim.keymap.set("n", "crn", vim.lsp.buf.rename, { buffer = args.buf })
+    vim.keymap.set({ "n", "v" }, "crr", vim.lsp.buf.code_action, { buffer = args.buf })
   end,
 })
 
