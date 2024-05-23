@@ -16,7 +16,7 @@ return {
       "nvim-telescope/telescope-live-grep-args.nvim",
       "nvim-telescope/telescope-fzf-native.nvim",
     },
-    tag = "0.1.6",
+    version = false,
     opts = {
       defaults = {
         mappings = {

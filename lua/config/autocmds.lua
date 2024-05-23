@@ -85,19 +85,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
-vim.api.nvim_create_autocmd("LspDetach", {
-  callback = function(args)
-    vim.keymap.del("n", "gd", { buffer = args.buf })
-    vim.keymap.del("n", "gr", { buffer = args.buf })
-
-    if vim.version().minor < 10 then
-      vim.keymap.del("n", "K", { buffer = args.buf })
-      vim.keymap.del("n", "crr", { buffer = args.buf })
-      vim.keymap.del({ "n", "v" }, "crn", { buffer = args.buf })
-    end
-  end,
-})
-
 -- LSP capabilities
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
@@ -114,13 +101,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
           vim.lsp.inlay_hint.enable()
         end
       end
-      if client.supports_method("textDocument/codeLens") then
-        vim.lsp.codelens.refresh()
-        vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-          buffer = args.buf,
-          callback = vim.lsp.codelens.refresh,
-        })
-      end
+      -- if client.supports_method("textDocument/codeLens") then
+      --   vim.lsp.codelens.refresh()
+      --   vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+      --     buffer = args.buf,
+      --     callback = vim.lsp.codelens.refresh,
+      --   })
+      -- end
     end
   end,
 })
