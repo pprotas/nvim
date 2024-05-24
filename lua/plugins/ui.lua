@@ -1,6 +1,6 @@
 return {
   { "stevearc/dressing.nvim", event = "VeryLazy" },
-  { "MunifTanjim/nui.nvim", lazy = true },
+  { "MunifTanjim/nui.nvim",   lazy = true },
   {
     "goolord/alpha-nvim",
     dependencies = "nvim-lualine/lualine.nvim",
@@ -19,11 +19,11 @@ return {
       dashboard.section.header.val = {
         -- stylua: ignore start
         { type = "text", val = "i use ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗      ", opts = { hl = "NeovimDashboardLogo1", shrink_margin = false, position = "center" }, },
-        { type = "text",       val = "████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║", opts = { hl = "NeovimDashboardLogo2", shrink_margin = false, position = "center" }, },
-        { type = "text",       val = "██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║", opts = { hl = "NeovimDashboardLogo3", shrink_margin = false, position = "center" }, },
-        { type = "text",       val = "██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║", opts = { hl = "NeovimDashboardLogo4", shrink_margin = false, position = "center" }, },
-        { type = "text",       val = "██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║", opts = { hl = "NeovimDashboardLogo5", shrink_margin = false, position = "center" }, },
-        { type = "text",   val = "    ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ btw", opts = { hl = "NeovimDashboardLogo6", shrink_margin = false, position = "center" }, },
+        { type = "text", val = "████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║", opts = { hl = "NeovimDashboardLogo2", shrink_margin = false, position = "center" }, },
+        { type = "text", val = "██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║", opts = { hl = "NeovimDashboardLogo3", shrink_margin = false, position = "center" }, },
+        { type = "text", val = "██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║", opts = { hl = "NeovimDashboardLogo4", shrink_margin = false, position = "center" }, },
+        { type = "text", val = "██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║", opts = { hl = "NeovimDashboardLogo5", shrink_margin = false, position = "center" }, },
+        { type = "text", val = "    ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ btw", opts = { hl = "NeovimDashboardLogo6", shrink_margin = false, position = "center" }, },
         -- stylua: ignore end
       }
       dashboard.section.buttons.val = {
@@ -42,12 +42,12 @@ return {
           local stats = require("lazy").stats()
           local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
           dashboard.section.footer.val = "Neovim loaded "
-            .. stats.loaded
-            .. "/"
-            .. stats.count
-            .. " plugins in "
-            .. ms
-            .. "ms"
+              .. stats.loaded
+              .. "/"
+              .. stats.count
+              .. " plugins in "
+              .. ms
+              .. "ms"
           pcall(vim.cmd.AlphaRedraw)
         end,
       })
@@ -231,7 +231,9 @@ return {
       options = {
         theme = "auto",
         globalstatus = true,
-        disabled_filetypes = { "alpha" },
+        disabled_filetypes = { "alpha", "spectre_panel", "trouble" },
+        section_separators = '',
+        component_separators = ''
       },
       winbar = {
         lualine_c = {
@@ -243,11 +245,16 @@ return {
           },
         },
       },
+      inactive_winbar = {
+        lualine_c = {
+          { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+          { "filename", path = 1 },
+        },
+      },
       sections = {
         lualine_a = { "mode" },
-        lualine_b = { "branch" },
-        lualine_c = {
-          "diagnostics",
+        lualine_b = {
+          "branch",
           {
             "diff",
             symbols = {
@@ -267,28 +274,20 @@ return {
             end,
           },
         },
+        lualine_c = {
+          "diagnostics",
+        },
         lualine_x = {
           {
             function()
               local reg = vim.fn.reg_recording()
               return reg ~= "" and "recording @" .. reg or ""
             end,
-            color = { fg = "orange", bg = "bg", gui = "bold" },
+            color = { fg = "orange", gui = "bold" },
           },
         },
-        lualine_y = {
-          {
-            "progress",
-            separator = " ",
-            padding = { left = 1, right = 0 },
-          },
-          { "location", padding = { left = 0, right = 1 } },
-        },
-        lualine_z = {
-          function()
-            return " " .. os.date("%R")
-          end,
-        },
+        lualine_y = {},
+        lualine_z = {}
       },
       extensions = { "lazy" },
     },
