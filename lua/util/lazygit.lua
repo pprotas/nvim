@@ -1,3 +1,27 @@
+-- Make lazygit interactable once it's opened in a terminal
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = "term://*lazygit*",
+  command = "startinsert"
+})
+
+-- Set a filetype so that we can hide the winbar
+vim.api.nvim_create_autocmd("TermOpen", {
+  pattern = "term://*lazygit*",
+  command = "set filetype=lazygit",
+})
+
+-- Hide Lazygit with <C-q>
+vim.api.nvim_create_autocmd("TermOpen", {
+  pattern = "term://*lazygit*",
+  callback = function(event)
+    vim.bo[event.buf].buflisted = false
+    vim.keymap.set("t", "<C-q>", function()
+      vim.cmd("stopinsert")
+      vim.cmd("hide")
+    end, { buffer = event.buf, silent = true })
+  end,
+})
+
 -- Utility to open up `lazygit` in a terminal
 local M = {}
 

@@ -1,18 +1,8 @@
 return {
-  { "nvim-treesitter/nvim-treesitter-context", lazy = true },
-  { "RRethy/nvim-treesitter-endwise", lazy = true },
-  { "windwp/nvim-ts-autotag", lazy = true },
+  { "nvim-treesitter/nvim-treesitter-context",     lazy = true },
+  { "RRethy/nvim-treesitter-endwise",              lazy = true },
+  { "windwp/nvim-ts-autotag",                      lazy = true },
   { "nvim-treesitter/nvim-treesitter-textobjects", lazy = true },
-  {
-    "JoosepAlviste/nvim-ts-context-commentstring",
-    lazy = true,
-    cond = function()
-      return vim.version().minor < 10
-    end,
-    opts = {
-      enable_autocmd = false,
-    },
-  },
   {
     "ckolkey/ts-node-action",
     keys = {

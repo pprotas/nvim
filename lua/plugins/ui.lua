@@ -192,27 +192,25 @@ return {
         animation = indentscope.gen_animation.none(),
       }
       indentscope.setup(opts)
-
+    end,
+    init = function()
       -- Disable indentscope for some files
       vim.api.nvim_create_autocmd("FileType", {
         pattern = {
           "help",
           "alpha",
-          "dashboard",
-          "neo-tree",
           "Trouble",
           "trouble",
           "lazy",
           "mason",
           "notify",
-          "toleterm",
           "lazyterm",
         },
         callback = function()
           vim.b.miniindentscope_disable = true
         end,
       })
-    end,
+    end
   },
   {
     "kevinhwang91/nvim-ufo",
