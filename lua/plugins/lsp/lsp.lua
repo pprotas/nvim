@@ -75,9 +75,30 @@ return {
       "hrsh7th/nvim-cmp",
     },
     config = function()
-      -- LSP keybinds
+      -- LSP settings
       vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(args)
+          vim.diagnostic.config({
+            severity_sort = true,
+            float = {
+              border = "rounded",
+              source = "if_many",
+            },
+            virtual_text = {
+              spacing = 4,
+              source = "if_many",
+              prefix = "●",
+            },
+            signs = {
+              text = {
+                [vim.diagnostic.severity.ERROR] = " ",
+                [vim.diagnostic.severity.WARN] = " ",
+                [vim.diagnostic.severity.HINT] = " ",
+                [vim.diagnostic.severity.INFO] = " ",
+              },
+            },
+          })
+
           vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = args.buf })
           vim.keymap.set("n", "gr", "<cmd>Trouble lsp_references focus=true<cr>", { buffer = args.buf })
           vim.keymap.set("n", "crn", vim.lsp.buf.rename, { buffer = args.buf })

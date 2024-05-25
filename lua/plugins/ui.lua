@@ -173,6 +173,10 @@ return {
         conditionals = "italic",
         virtual_text = "italic",
       },
+      options = {
+        cursorline = true,
+        highlight_inactive_windows = true
+      }
     },
     init = function()
       vim.cmd.colorscheme("onedark_dark")
@@ -204,7 +208,7 @@ return {
           "lazy",
           "mason",
           "notify",
-          "lazyterm",
+          "noice"
         },
         callback = function()
           vim.b.miniindentscope_disable = true
@@ -221,6 +225,20 @@ return {
         return { "treesitter" }
       end,
     },
+    init = function()
+      -- Folding
+      -- TODO: This isn't fully working?
+      vim.opt.fillchars = {
+        foldopen = "",
+        foldclose = "",
+        fold = " ",
+        foldsep = " ",
+        diff = "╱",
+        eob = " ",
+      }
+      vim.o.foldlevel = 99
+      vim.o.foldlevelstart = 99
+    end
   },
   {
     "folke/zen-mode.nvim",

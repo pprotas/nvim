@@ -25,9 +25,7 @@ vim.o.tabstop = 2
 -- Line numbers
 vim.o.number = true
 vim.o.relativenumber = true
-
--- Gutters
-vim.o.signcolumn = "yes"
+vim.o.cursorline = true
 
 -- Mouse
 vim.o.mouse = "a"
@@ -41,22 +39,6 @@ vim.o.splitkeep = "screen"
 -- Spelling
 vim.o.spelllang = "en"
 
--- Colors
-vim.o.termguicolors = true
-vim.o.cursorline = true
-
--- Folding
-vim.opt.fillchars = {
-  foldopen = "",
-  foldclose = "",
-  fold = " ",
-  foldsep = " ",
-  diff = "╱",
-  eob = " ",
-}
-vim.o.foldlevel = 99
-vim.o.foldlevelstart = 99
-
 -- Wrapping lines
 vim.o.wrap = true
 vim.o.showbreak = "↪ "
@@ -65,43 +47,7 @@ vim.o.breakindent = true
 vim.o.breakindentopt = "shift:-2"
 vim.o.linebreak = true
 
--- LSP
-vim.diagnostic.config({
-  float = {
-    focusable = false,
-    style = "minimal",
-    border = "rounded",
-    source = true,
-    header = "",
-    prefix = "",
-  },
-  virtual_text = {
-    spacing = 4,
-    source = "if_many",
-    prefix = "●",
-  },
-  underline = true,
-  severity_sort = true,
-  signs = {
-    text = {
-      [vim.diagnostic.severity.ERROR] = " ",
-      [vim.diagnostic.severity.WARN] = " ",
-      [vim.diagnostic.severity.HINT] = " ",
-      [vim.diagnostic.severity.INFO] = " ",
-    },
-  },
-})
-
--- Providers
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_node_provider = 0
-
--- Plugin-specific
--- Better loading performance for "JoosepAlviste/nvim-ts-context-commentstring"
-vim.g.skip_ts_context_commentstring_module = true
-
--- For "folke/which-key.nvim"
-vim.o.timeout = true
-vim.o.timeoutlen = 300

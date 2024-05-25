@@ -113,12 +113,19 @@ return {
       wk.register({
         b = { name = "Buffer actions" },
         c = { name = "Code" },
-        g = { name = "Git" },
+        g = {
+          name = "Git",
+          h = "Hunk"
+        },
         n = { name = "Notifications" },
         u = { name = "Toggle" },
         s = { name = "Search" },
       }, { prefix = "<leader>" })
     end,
+    init = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 300
+    end
   },
   {
     "stevearc/oil.nvim",
