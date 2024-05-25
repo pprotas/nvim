@@ -102,9 +102,6 @@ vim.g.loaded_node_provider = 0
 -- Better loading performance for "JoosepAlviste/nvim-ts-context-commentstring"
 vim.g.skip_ts_context_commentstring_module = true
 
--- Filetypes with slow formatters for "stevearc/conform.nvim"
-vim.g.slow_format_filetypes = {}
-
 -- For "folke/which-key.nvim"
 vim.o.timeout = true
 vim.o.timeoutlen = 300
