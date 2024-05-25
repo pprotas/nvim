@@ -52,6 +52,19 @@ map("n", "<leader>uf", function()
   vim.notify(string.format("LSP auto-format %s", vim.g.disable_autoformat and "disabled" or "enabled"))
 end, { desc = "Toggle auto-format", remap = true })
 
+-- Toggle relativenumber outside insertmode
+map("n", "<leader>un", function()
+  vim.g.disable_relativenumber = (vim.g.disable_relativenumber == nil) and true or not vim.g.disable_relativenumber
+
+  if vim.g.disable_relativenumber then
+    vim.cmd("set norelativenumber")
+  else
+    vim.cmd("set relativenumber")
+  end
+
+  vim.notify(string.format("Normie mode %s", vim.g.disable_relativenumber and "enabled" or "disabled"))
+end, { desc = "Toggle normie mode", remap = true })
+
 -- Buffer management
 map("n", "<leader>bo", "<cmd>%bd|e#<cr>", { desc = "Delete other buffers" })
 map(

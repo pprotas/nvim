@@ -8,7 +8,9 @@ vim.api.nvim_create_autocmd("InsertEnter", {
 
 vim.api.nvim_create_autocmd("InsertLeave", {
   callback = function()
-    vim.cmd("set relativenumber")
+    if not vim.g.disable_relativenumber then
+      vim.cmd("set relativenumber")
+    end
   end,
   pattern = "*",
 })
