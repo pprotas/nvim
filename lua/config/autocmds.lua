@@ -1,27 +1,18 @@
 -- Toggling relative numbers outside of insert mode
 vim.api.nvim_create_autocmd("InsertEnter", {
-  callback = function()
-    vim.cmd("set norelativenumber")
-  end,
   pattern = "*",
+  command = "set norelativenumber"
 })
 
 vim.api.nvim_create_autocmd("InsertLeave", {
+  pattern = "*",
   callback = function()
     if not vim.g.disable_relativenumber then
       vim.cmd("set relativenumber")
     end
   end,
-  pattern = "*",
 })
 
--- Make lazygit interactable once it's opened in a terminal
-vim.api.nvim_create_autocmd("BufEnter", {
-  pattern = "term://*lazygit*",
-  callback = function()
-    vim.cmd("startinsert")
-  end,
-})
 
 -- Closing/hiding some buffers easily
 vim.api.nvim_create_autocmd("FileType", {
@@ -43,10 +34,22 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- Lazygit
+-- Make lazygit interactable once it's opened in a terminal
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = "term://*lazygit*",
+  command = "startinsert"
+})
+
+-- Set a filetype so that we can hide the winbar
 vim.api.nvim_create_autocmd("TermOpen", {
-  pattern = {
-    "term://*lazygit*",
-  },
+  pattern = "term://*lazygit*",
+  command = "set filetype=lazygit",
+})
+
+-- Hide Lazygit with <C-q>
+vim.api.nvim_create_autocmd("TermOpen", {
+  pattern = "term://*lazygit*",
   callback = function(event)
     vim.bo[event.buf].buflisted = false
     vim.keymap.set("t", "<C-q>", function()
@@ -61,70 +64,12 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = {
     "markdown",
   },
-  callback = function()
-    vim.o.conceallevel = 2
-  end,
+  command = "set conceallevel=2"
 })
 
 -- Highlight yanking
 vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()
     vim.highlight.on_yank()
-  end,
-})
-
--- LSP keybinds
-vim.api.nvim_create_autocmd("LspAttach", {
-  callback = function(args)
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = args.buf })
-    vim.keymap.set("n", "gr", "<cmd>Trouble lsp_references focus=true<cr>", { buffer = args.buf })
-    vim.keymap.set("n", "crn", vim.lsp.buf.rename, { buffer = args.buf })
-    vim.keymap.set({ "n", "v" }, "crr", vim.lsp.buf.code_action, { buffer = args.buf })
-  end,
-})
-
--- LSP capabilities
-vim.api.nvim_create_autocmd("LspAttach", {
-  callback = function(args)
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-
-    if client then
-      if client.name == "eslint" then
-        client.server_capabilities.documentFormattingProvider = true
-      elseif client.name == "tsserver" then
-        client.server_capabilities.documentFormattingProvider = false
-      end
-
-      if client.supports_method("textDocument/inlayHint") then
-        vim.lsp.inlay_hint.enable()
-      end
-    end
-  end,
-})
-
--- Linting
-vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave", "BufWritePost" }, {
-  callback = function()
-    require("lint").try_lint()
-  end,
-})
-
--- Indentscope toggling
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = {
-    "help",
-    "alpha",
-    "dashboard",
-    "neo-tree",
-    "Trouble",
-    "trouble",
-    "lazy",
-    "mason",
-    "notify",
-    "toleterm",
-    "lazyterm",
-  },
-  callback = function()
-    vim.b.miniindentscope_disable = true
   end,
 })

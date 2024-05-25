@@ -182,14 +182,35 @@ return {
     "echasnovski/mini.indentscope",
     event = "VeryLazy",
     version = false,
-    config = function()
+    opts = {
+      symbol = "│",
+      options = { try_as_border = true },
+    },
+    config = function(_, opts)
       local indentscope = require("mini.indentscope")
-      indentscope.setup({
-        symbol = "│",
-        options = { try_as_border = true },
-        draw = {
-          animation = indentscope.gen_animation.none(),
+      opts.draw = {
+        animation = indentscope.gen_animation.none(),
+      }
+      indentscope.setup(opts)
+
+      -- Disable indentscope for some files
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = {
+          "help",
+          "alpha",
+          "dashboard",
+          "neo-tree",
+          "Trouble",
+          "trouble",
+          "lazy",
+          "mason",
+          "notify",
+          "toleterm",
+          "lazyterm",
         },
+        callback = function()
+          vim.b.miniindentscope_disable = true
+        end,
       })
     end,
   },
@@ -231,7 +252,7 @@ return {
       options = {
         theme = "auto",
         globalstatus = true,
-        disabled_filetypes = { "alpha", "spectre_panel", "trouble" },
+        disabled_filetypes = { "alpha", "spectre_panel", "trouble", "lazygit", "oil" },
         section_separators = '',
         component_separators = ''
       },

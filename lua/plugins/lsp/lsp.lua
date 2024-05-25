@@ -74,6 +74,36 @@ return {
       "j-hui/fidget.nvim",
       "hrsh7th/nvim-cmp",
     },
+    config = function()
+      -- LSP keybinds
+      vim.api.nvim_create_autocmd("LspAttach", {
+        callback = function(args)
+          vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = args.buf })
+          vim.keymap.set("n", "gr", "<cmd>Trouble lsp_references focus=true<cr>", { buffer = args.buf })
+          vim.keymap.set("n", "crn", vim.lsp.buf.rename, { buffer = args.buf })
+          vim.keymap.set({ "n", "v" }, "crr", vim.lsp.buf.code_action, { buffer = args.buf })
+        end,
+      })
+
+      -- LSP capabilities
+      vim.api.nvim_create_autocmd("LspAttach", {
+        callback = function(args)
+          local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+          if client then
+            if client.name == "eslint" then
+              client.server_capabilities.documentFormattingProvider = true
+            elseif client.name == "tsserver" then
+              client.server_capabilities.documentFormattingProvider = false
+            end
+
+            if client.supports_method("textDocument/inlayHint") then
+              vim.lsp.inlay_hint.enable()
+            end
+          end
+        end,
+      })
+    end
   },
   {
     "williamboman/mason.nvim",
