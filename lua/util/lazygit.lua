@@ -1,13 +1,19 @@
 -- Make lazygit interactable once it's opened in a terminal
 vim.api.nvim_create_autocmd("BufEnter", {
   pattern = "term://*lazygit*",
-  command = "startinsert"
+  command = "startinsert",
 })
 
 -- Set a filetype so that we can hide the winbar
-vim.api.nvim_create_autocmd("TermOpen", {
+vim.api.nvim_create_autocmd("TermEnter", {
   pattern = "term://*lazygit*",
-  command = "set filetype=lazygit",
+  callback = function()
+    vim.cmd("set filetype=lazygit")
+    -- Disable line numbers
+    vim.defer_fn(function()
+      vim.cmd("set nonumber norelativenumber")
+    end, 10) -- 10 ms delay to prevent rendering bugs
+  end,
 })
 
 -- Hide Lazygit with <C-q>
@@ -33,8 +39,6 @@ function M.toggle_lazygit()
       vim.cmd("vsplit")
       M.lazygit_win = vim.api.nvim_get_current_win()
       vim.api.nvim_win_set_buf(M.lazygit_win, M.lazygit_buf)
-      vim.wo[M.lazygit_win].number = false
-      vim.wo[M.lazygit_win].relativenumber = false
     end
     return
   end
@@ -43,8 +47,6 @@ function M.toggle_lazygit()
   vim.cmd("vsplit")
   M.lazygit_win = vim.api.nvim_get_current_win()
   vim.api.nvim_win_set_buf(M.lazygit_win, M.lazygit_buf)
-  vim.wo[M.lazygit_win].number = false
-  vim.wo[M.lazygit_win].relativenumber = false
 
   local term_opts = {
     on_exit = function()
@@ -61,11 +63,9 @@ end
 -- Open `lazygit` in a terminal
 function M.open()
   local Process = require("lazy.manage.process")
-  local ok, lines = pcall(Process.exec, { "lazygit", "-cd" })
+  local ok = pcall(Process.exec, { "lazygit", "-cd" })
 
   if ok then
-    local config_dir = lines[1]
-    vim.env.LG_CONFIG_FILE = config_dir .. "/config.yml"
     M.toggle_lazygit()
   else
     vim.notify("Could not open LazyGit", vim.log.levels.ERROR)
