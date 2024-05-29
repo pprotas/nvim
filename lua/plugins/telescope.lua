@@ -9,6 +9,14 @@ return {
     build = "make",
   },
   {
+    "danielfalk/smart-open.nvim",
+    dependencies = {
+      "kkharji/sqlite.lua",
+      "nvim-telescope/telescope-fzf-native.nvim",
+    },
+    branch = "0.2.x",
+  },
+  {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
     dependencies = {
@@ -50,6 +58,9 @@ return {
             },
           },
         },
+        smart_open = {
+          match_algorithm = "fzf"
+        }
       },
     },
     config = function(_, opts)
@@ -58,12 +69,13 @@ return {
 
       telescope.load_extension("live_grep_args")
       telescope.load_extension("fzf")
+      require("telescope").load_extension("smart_open")
     end,
     keys = {
       {
         "<leader> ",
         function()
-          return require("telescope.builtin").find_files()
+          return require("telescope").extensions.smart_open.smart_open({ filename_first = true })
         end,
         desc = "Find files",
       },
