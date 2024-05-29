@@ -59,8 +59,8 @@ return {
           },
         },
         smart_open = {
-          match_algorithm = "fzf"
-        }
+          match_algorithm = "fzf",
+        },
       },
     },
     config = function(_, opts)
@@ -75,7 +75,7 @@ return {
       {
         "<leader> ",
         function()
-          return require("telescope").extensions.smart_open.smart_open({ filename_first = true })
+          return require("telescope").extensions.smart_open.smart_open({ filename_first = true, cwd_only = true })
         end,
         desc = "Find files",
       },

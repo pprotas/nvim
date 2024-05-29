@@ -3,6 +3,7 @@ return {
   { "MunifTanjim/nui.nvim", lazy = true },
   {
     "brenoprata10/nvim-highlight-colors",
+    event = "VeryLazy",
     opts = {
       render = "virtual",
       enable_tailwind = true,

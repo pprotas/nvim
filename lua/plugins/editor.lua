@@ -18,6 +18,11 @@ return {
     config = true,
   },
   {
+    "folke/ts-comments.nvim",
+    event = "VeryLazy",
+    config = true,
+  },
+  {
     "echasnovski/mini.surround",
     event = "VeryLazy",
     version = false,
@@ -115,7 +120,7 @@ return {
         c = { name = "Code" },
         g = {
           name = "Git",
-          h = "Hunk"
+          h = "Hunk",
         },
         n = { name = "Notifications" },
         u = { name = "Toggle" },
@@ -125,7 +130,7 @@ return {
     init = function()
       vim.o.timeout = true
       vim.o.timeoutlen = 300
-    end
+    end,
   },
   {
     "stevearc/oil.nvim",
@@ -154,5 +159,5 @@ return {
         desc = "Oil",
       },
     },
-  }
+  },
 }
