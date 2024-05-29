@@ -1,6 +1,13 @@
 return {
   { "stevearc/dressing.nvim", event = "VeryLazy" },
-  { "MunifTanjim/nui.nvim",   lazy = true },
+  { "MunifTanjim/nui.nvim", lazy = true },
+  {
+    "brenoprata10/nvim-highlight-colors",
+    opts = {
+      render = "virtual",
+      enable_tailwind = true,
+    },
+  },
   {
     "goolord/alpha-nvim",
     dependencies = "nvim-lualine/lualine.nvim",
@@ -19,11 +26,11 @@ return {
       dashboard.section.header.val = {
         -- stylua: ignore start
         { type = "text", val = "i use ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗      ", opts = { hl = "NeovimDashboardLogo1", shrink_margin = false, position = "center" }, },
-        { type = "text", val = "████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║", opts = { hl = "NeovimDashboardLogo2", shrink_margin = false, position = "center" }, },
-        { type = "text", val = "██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║", opts = { hl = "NeovimDashboardLogo3", shrink_margin = false, position = "center" }, },
-        { type = "text", val = "██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║", opts = { hl = "NeovimDashboardLogo4", shrink_margin = false, position = "center" }, },
-        { type = "text", val = "██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║", opts = { hl = "NeovimDashboardLogo5", shrink_margin = false, position = "center" }, },
-        { type = "text", val = "    ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ btw", opts = { hl = "NeovimDashboardLogo6", shrink_margin = false, position = "center" }, },
+              { type = "text", val = "████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║", opts = { hl = "NeovimDashboardLogo2", shrink_margin = false, position = "center" }, },
+              { type = "text", val = "██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║", opts = { hl = "NeovimDashboardLogo3", shrink_margin = false, position = "center" }, },
+              { type = "text", val = "██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║", opts = { hl = "NeovimDashboardLogo4", shrink_margin = false, position = "center" }, },
+              { type = "text", val = "██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║", opts = { hl = "NeovimDashboardLogo5", shrink_margin = false, position = "center" }, },
+          { type = "text", val = "    ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ btw", opts = { hl = "NeovimDashboardLogo6", shrink_margin = false, position = "center" }, },
         -- stylua: ignore end
       }
       dashboard.section.buttons.val = {
@@ -42,12 +49,12 @@ return {
           local stats = require("lazy").stats()
           local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
           dashboard.section.footer.val = "Neovim loaded "
-              .. stats.loaded
-              .. "/"
-              .. stats.count
-              .. " plugins in "
-              .. ms
-              .. "ms"
+            .. stats.loaded
+            .. "/"
+            .. stats.count
+            .. " plugins in "
+            .. ms
+            .. "ms"
           pcall(vim.cmd.AlphaRedraw)
         end,
       })
@@ -175,8 +182,8 @@ return {
       },
       options = {
         cursorline = true,
-        highlight_inactive_windows = true
-      }
+        highlight_inactive_windows = true,
+      },
     },
     init = function()
       vim.cmd.colorscheme("onedark_dark")
@@ -208,13 +215,13 @@ return {
           "lazy",
           "mason",
           "notify",
-          "noice"
+          "noice",
         },
         callback = function()
           vim.b.miniindentscope_disable = true
         end,
       })
-    end
+    end,
   },
   {
     "kevinhwang91/nvim-ufo",
@@ -238,7 +245,7 @@ return {
       }
       vim.o.foldlevel = 99
       vim.o.foldlevelstart = 99
-    end
+    end,
   },
   {
     "folke/zen-mode.nvim",
@@ -269,8 +276,8 @@ return {
         theme = "auto",
         globalstatus = true,
         disabled_filetypes = { "alpha", "spectre_panel", "trouble", "lazygit", "oil" },
-        section_separators = '',
-        component_separators = ''
+        section_separators = "",
+        component_separators = "",
       },
       winbar = {
         lualine_c = {
@@ -324,7 +331,7 @@ return {
           },
         },
         lualine_y = {},
-        lualine_z = {}
+        lualine_z = {},
       },
       extensions = { "lazy" },
     },
