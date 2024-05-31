@@ -52,8 +52,8 @@ return {
           ["<cr>"] = cmp.mapping.confirm({ select = false }),
           ["<C-p>"] = cmp.mapping.select_prev_item(),
           ["<C-n>"] = cmp.mapping.select_next_item(),
-          ['<C-y>'] = cmp.mapping.scroll_docs(-1),
-          ['<C-e>'] = cmp.mapping.scroll_docs(1),
+          ["<C-y>"] = cmp.mapping.scroll_docs(-1),
+          ["<C-e>"] = cmp.mapping.scroll_docs(1),
           ["<C-space>"] = cmp.mapping.complete(),
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
@@ -77,6 +77,7 @@ return {
           end, { "i", "n" }),
         }),
         sources = cmp.config.sources({
+          { name = "supermaven" },
           { name = "nvim_lsp" },
           { name = "luasnip" },
         }, {
@@ -86,6 +87,7 @@ return {
           format = require("lspkind").cmp_format({
             maxwidth = 50,
             ellipsis_char = "...",
+            symbol_map = { Supermaven = "" },
           }),
         },
       }
