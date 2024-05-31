@@ -1,7 +1,7 @@
 -- Toggling relative numbers outside of insert mode
 vim.api.nvim_create_autocmd("InsertEnter", {
   pattern = "*",
-  command = "set norelativenumber"
+  command = "set norelativenumber",
 })
 
 vim.api.nvim_create_autocmd("InsertLeave", {
@@ -12,7 +12,6 @@ vim.api.nvim_create_autocmd("InsertLeave", {
     end
   end,
 })
-
 
 -- Closing/hiding some buffers easily
 vim.api.nvim_create_autocmd("FileType", {
@@ -32,14 +31,6 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.bo[event.buf].buflisted = false
     vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
   end,
-})
-
--- Conceallevel
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = {
-    "markdown",
-  },
-  command = "set conceallevel=2"
 })
 
 -- Highlight yanking

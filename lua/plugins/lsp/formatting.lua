@@ -21,6 +21,7 @@ return {
         sh = { "shfmt" },
         cmake = { "gersemi" },
         cucumber = { "reformat-gherkin" },
+        rust = { "rustfmt" },
       },
       format_on_save = {
         lsp_fallback = true,
