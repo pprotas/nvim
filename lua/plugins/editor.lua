@@ -161,6 +161,11 @@ return {
     },
   },
   {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = true,
+  },
+  {
     "supermaven-inc/supermaven-nvim",
     opts = {
       disable_inline_completion = true,
