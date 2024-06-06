@@ -17,11 +17,11 @@ return {
         lua = { "stylua" },
         gdscript = { "gdformat" },
         clang = { "clang-format" },
-        ruby = { "rubocop", "erb-format" },
+        ruby = { "rubocop" },
         sh = { "shfmt" },
         cmake = { "gersemi" },
-        cucumber = { "reformat-gherkin" },
         rust = { "rustfmt" },
+        markdown = { "markdownlint" },
       },
       format_on_save = {
         lsp_fallback = true,

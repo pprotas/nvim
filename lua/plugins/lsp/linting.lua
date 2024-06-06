@@ -9,6 +9,7 @@ return {
         ruby = { "ruby", "rubocop" },
         sh = { "shellcheck" },
         cmake = { "cmakelint" },
+        markdown = { "markdownlint" },
         javascript = {},
         typescript = {},
       }

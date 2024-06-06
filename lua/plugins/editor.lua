@@ -84,7 +84,7 @@ return {
   },
   {
     "RRethy/vim-illuminate",
-    event = "BufEnter",
+    event = "VeryLazy",
     opts = {
       delay = 200,
       providers = { "lsp" },
@@ -162,11 +162,13 @@ return {
   },
   {
     "folke/todo-comments.nvim",
+    event = "VeryLazy",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = true,
   },
   {
     "supermaven-inc/supermaven-nvim",
+    event = "VeryLazy",
     opts = {
       disable_inline_completion = true,
     },

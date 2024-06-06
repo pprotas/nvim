@@ -146,6 +146,8 @@ return {
         "jsonls",
         "solargraph",
         "rubocop",
+        "markdown_oxide",
+        "cucumber_language_server",
       },
     },
     config = function(_, opts)
@@ -196,5 +198,20 @@ return {
         end,
       })
     end,
+  },
+  {
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    event = "VeryLazy",
+    dependencies = "williamboman/mason-lspconfig.nvim",
+    opts = {
+      ensure_installed = {
+        "codespell",
+        "shellcheck",
+        "stylua",
+        "clang-format",
+        "gersemi",
+        "gdformat",
+      },
+    },
   },
 }
