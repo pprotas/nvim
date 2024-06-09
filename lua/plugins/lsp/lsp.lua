@@ -137,6 +137,8 @@ return {
     dependencies = "hrsh7th/cmp-nvim-lsp",
     opts = {
       ensure_installed = {
+        "typos_lsp",
+        "emmet_language_server",
         "lua_ls",
         "clangd",
         "rust_analyzer",
@@ -205,7 +207,6 @@ return {
     dependencies = "williamboman/mason-lspconfig.nvim",
     opts = {
       ensure_installed = {
-        "codespell",
         "shellcheck",
         "stylua",
         "clang-format",
