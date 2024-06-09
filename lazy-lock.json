@@ -63,4 +63,3 @@
   "vim-sanegx": { "branch": "master", "commit": "e97c10401d781199ba1aecd07790d0771314f3f5" },
   "which-key.nvim": { "branch": "main", "commit": "0539da005b98b02cf730c1d9da82b8e8edb1c2d2" },
   "zen-mode.nvim": { "branch": "main", "commit": "78557d972b4bfbb7488e17b5703d25164ae64e6a" }
-}

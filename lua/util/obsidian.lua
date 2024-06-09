@@ -7,7 +7,9 @@ function M.open()
     return
   end
 
-  vim.cmd("!xdg-open 'obsidian://open?vault=notes&file=%'")
+  local file_path = vim.api.nvim_buf_get_name(0)
+  local relative_path = vim.fn.fnamemodify(file_path, ":.")
+  vim.cmd("!xdg-open 'obsidian://open?vault=notes&file=" .. relative_path .. "'")
 end
 
 return M
