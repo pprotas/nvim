@@ -29,7 +29,7 @@ return {
       {
         "<C-k>",
         function()
-          require("smart-splits").move_cursor_top()
+          require("smart-splits").move_cursor_up()
         end,
         mode = { "n", "t" },
         desc = "Top split",
@@ -62,7 +62,7 @@ return {
       {
         "<C-Up>",
         function()
-          require("smart-splits").resize_top()
+          require("smart-splits").resize_up()
         end,
         mode = { "n", "t" },
         desc = "Resize top split",
