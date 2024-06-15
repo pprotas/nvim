@@ -76,5 +76,10 @@ return {
         },
       })
     end,
+    init = function()
+      vim.filetype.add({
+        pattern = { [".*/hypr/.*%.conf"] = "hyprlang" },
+      })
+    end
   },
 }

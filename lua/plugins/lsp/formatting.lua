@@ -22,6 +22,7 @@ return {
         cmake = { "gersemi" },
         rust = { "rustfmt" },
         markdown = { "markdownlint" },
+        nix = { "nixpkgs_fmt" }
       },
       format_on_save = {
         lsp_fallback = true,

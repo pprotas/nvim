@@ -17,9 +17,9 @@ return {
     config = true,
     keys = {
       { "<leader>cc", "<cmd>Trouble diagnostics toggle filter.buf=0 focus=true<cr>", desc = "Document diagnostics" },
-      { "<leader>cC", "<cmd>Trouble diagnostics toggle focus=true<cr>", desc = "Workspace diagnostics" },
-      { "<leader>cq", "<cmd>Trouble quickfix toggle focus=true<cr>", desc = "Quickfix" },
-      { "<leader>cl", "<cmd>Trouble loclist toggle focus=true<cr>", desc = "Loclist" },
+      { "<leader>cC", "<cmd>Trouble diagnostics toggle focus=true<cr>",              desc = "Workspace diagnostics" },
+      { "<leader>cq", "<cmd>Trouble quickfix toggle focus=true<cr>",                 desc = "Quickfix" },
+      { "<leader>cl", "<cmd>Trouble loclist toggle focus=true<cr>",                  desc = "Loclist" },
     },
   },
   {
@@ -123,6 +123,18 @@ return {
           end
         end,
       })
+
+
+      vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
+        pattern = { "*.hl", "hypr*.conf" },
+        callback = function(event)
+          vim.lsp.start {
+            name = "hyprlang",
+            cmd = { "hyprls" },
+            root_dir = vim.fn.getcwd(),
+          }
+        end
+      })
     end,
   },
   {
@@ -149,7 +161,6 @@ return {
         "solargraph",
         "rubocop",
         "markdown_oxide",
-        "cucumber_language_server",
       },
     },
     config = function(_, opts)
@@ -158,7 +169,7 @@ return {
 
       local cmp_lsp = require("cmp_nvim_lsp")
       local capabilities =
-        vim.tbl_deep_extend("force", {}, vim.lsp.protocol.make_client_capabilities(), cmp_lsp.default_capabilities())
+          vim.tbl_deep_extend("force", {}, vim.lsp.protocol.make_client_capabilities(), cmp_lsp.default_capabilities())
 
       mason_lspconfig.setup_handlers({
         function(server_name)
