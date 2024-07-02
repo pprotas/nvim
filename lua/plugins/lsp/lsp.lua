@@ -123,18 +123,6 @@ return {
           end
         end,
       })
-
-
-      vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
-        pattern = { "*.hl", "hypr*.conf" },
-        callback = function(event)
-          vim.lsp.start {
-            name = "hyprlang",
-            cmd = { "hyprls" },
-            root_dir = vim.fn.getcwd(),
-          }
-        end
-      })
     end,
   },
   {
@@ -182,6 +170,13 @@ return {
           lspconfig.tsserver.setup({
             capabilities = capabilities,
             init_options = {
+              plugins = {
+                {
+                  name = "@vue/typescript-plugin",
+                  location = "/home/pawel/.local/share/nvim/mason/bin/node_modules/@vue/typescript-plugin",
+                  languages = { "vue" },
+                },
+              },
               preferences = {
                 includeInlayParameterNameHints = "all",
                 includeInlayParameterNameHintsWhenArgumentMatchesName = true,
@@ -192,6 +187,13 @@ return {
                 includeInlayEnumMemberValueHints = true,
                 importModuleSpecifierPreference = "non-relative",
               },
+            },
+            filetypes = {
+              "javascript",
+              "typescript",
+              "javascriptreact",
+              "typescriptreact",
+              "vue",
             },
           })
         end,
