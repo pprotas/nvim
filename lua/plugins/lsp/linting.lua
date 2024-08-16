@@ -16,10 +16,6 @@ return {
 
       local lint = require("lint")
 
-      for ft, _ in pairs(linters_by_ft) do
-        table.insert(linters_by_ft[ft], 1, "codespell")
-      end
-
       lint.linters_by_ft = linters_by_ft
 
       -- Configure individual linters here

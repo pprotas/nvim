@@ -56,6 +56,7 @@ return {
       },
       lsp = {
         auto_attach = true,
+        preference = { "tsserver", "volar" }
       },
       highlight = true,
       separator = "  ",
@@ -115,10 +116,12 @@ return {
               client.server_capabilities.documentFormattingProvider = true
             elseif client.name == "tsserver" then
               client.server_capabilities.documentFormattingProvider = false
+            elseif client.name == "volar" then
+              client.server_capabilities.documentFormattingProvider = false
             end
 
             if client.supports_method("textDocument/inlayHint") then
-              vim.lsp.inlay_hint.enable()
+              -- vim.lsp.inlay_hint.enable()
             end
           end
         end,
