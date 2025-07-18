@@ -69,20 +69,6 @@ return {
     },
   },
   {
-    "folke/persistence.nvim",
-    event = "BufReadPre",
-    config = true,
-    keys = {
-      {
-        "<leader>x",
-        function()
-          require("persistence").load()
-        end,
-        desc = "Resume session",
-      },
-    },
-  },
-  {
     "RRethy/vim-illuminate",
     event = "VeryLazy",
     opts = {
@@ -93,84 +79,5 @@ return {
     config = function(_, opts)
       require("illuminate").configure(opts)
     end,
-  },
-  {
-    "nvim-pack/nvim-spectre",
-    opts = {
-      live_update = true,
-    },
-    keys = {
-      {
-        "<leader>ss",
-        function()
-          require("spectre").toggle()
-        end,
-        desc = "Search & replace",
-      },
-    },
-  },
-  {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    config = function(_, opts)
-      local wk = require("which-key")
-      wk.setup(opts)
-      wk.register({
-        b = { name = "Buffer actions" },
-        c = { name = "Code" },
-        g = {
-          name = "Git",
-          h = "Hunk",
-        },
-        n = { name = "Notifications" },
-        u = { name = "Toggle" },
-        s = { name = "Search" },
-      }, { prefix = "<leader>" })
-    end,
-    init = function()
-      vim.o.timeout = true
-      vim.o.timeoutlen = 300
-    end,
-  },
-  {
-    "stevearc/oil.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    opts = {
-      view_options = {
-        show_hidden = true,
-      },
-      keymaps = {
-        ["<CR>"] = "actions.select",
-        ["<S-cr>"] = "actions.select_vsplit",
-        ["q"] = "actions.close",
-        ["<C-s>"] = false,
-        ["<C-h>"] = false,
-        ["<C-t>"] = false,
-        ["<C-p>"] = false,
-        ["<C-l>"] = false,
-      },
-    },
-    keys = {
-      {
-        "<leader>e",
-        function()
-          require("oil").open()
-        end,
-        desc = "Oil",
-      },
-    },
-  },
-  {
-    "folke/todo-comments.nvim",
-    event = "VeryLazy",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    config = true,
-  },
-  {
-    "supermaven-inc/supermaven-nvim",
-    event = "VeryLazy",
-    opts = {
-      disable_inline_completion = true,
-    },
   },
 }

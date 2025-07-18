@@ -73,16 +73,3 @@ map(
   [[<cmd>redir @* | execute 'echon expand("%")' | redir END | echo @*<cr>]],
   { desc = "Copy buffer path" }
 )
-
--- Lazygit
-map("n", "<leader>gg", function()
-  require("util.lazygit").open()
-end, { desc = "Lazygit", noremap = true, silent = true })
-
--- Wezterm
-local wezterm = require("util.wezterm")
-local nav = wezterm.nav
-for key, dir in pairs(nav) do
-  vim.keymap.set("n", "<" .. dir .. ">", wezterm.navigate(key))
-  vim.keymap.set("n", "<C-" .. key .. ">", wezterm.navigate(key))
-end
